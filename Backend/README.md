@@ -22,7 +22,7 @@ my-os-simulator
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/my-os-simulator.git
-   cd Backend
+   cd my-os-simulator
    ```
 
 2. Create a virtual environment:
