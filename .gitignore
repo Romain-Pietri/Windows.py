@@ -3,3 +3,5 @@ Front/build/
 Front/.env
 
 Front/node_modules/
+
+Backend/commands_history.db

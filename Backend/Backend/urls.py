@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import execute_command
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/command/', execute_command),
+    path('api/last_command/', get_last_command),
 ]

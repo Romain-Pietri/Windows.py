@@ -37,6 +37,23 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
                 setOutput((prevOutput) => [...prevOutput, 'Error: Unable to fetch data']);
             }
             setInput('');
+        } else if (e.key === 'ArrowUp') {
+            try {
+                const response = await fetch('http://localhost:8000/api/last_command/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const data = await response.json();
+                console.log('Last command:', data.result);
+                setInput(data.result);
+                if (inputRef.current) {
+                    inputRef.current.value = data.result; // Mettre à jour la valeur de l'input
+                }
+            } catch (error) {
+                console.error('Error fetching last command:', error);
+            }
         }
     };
 
@@ -52,7 +69,7 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
                         type="text"
                         value={input}
                         onChange={handleInputChange}
-                        onKeyPress={handleKeyPress}
+                        onKeyDown={handleKeyPress}
                         ref={inputRef}
                         autoFocus
                     />
