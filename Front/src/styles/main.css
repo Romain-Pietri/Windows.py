@@ -35,10 +35,132 @@ body, html {
 }
 
 .window {
-  width: 300px;
-  height: 200px;
-  background-color: white;
+  width: 600px;
+  height: 400px;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: none; /* Pas de couleur de fond */
+  overflow: hidden; /* Empêche le débordement */
+}
+
+.window-header {
+  background-color: #333;
+  color: white;
   padding: 10px;
-  margin-top: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+
+.window-header button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.window-content {
+  padding: 0; /* Supprime les marges internes */
+  flex-grow: 1;
+  overflow: hidden; /* Empêche le débordement */
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-window {
+  width: 600px;
+  height: 400px;
+  background-color: black;
+  color: green;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-content {
+  padding: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-y: auto;
+  color: #d4d4d4; /* Couleur du texte */
+  background-color: #1e1e1e; /* Couleur de fond sombre */
+  flex-grow: 1; /* Prendre toute la hauteur disponible */
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin; /* Largeur de la barre de défilement */
+  scrollbar-color: #555 #1e1e1e; /* Couleur de la poignée et de la piste */
+}
+
+.terminal-content p {
+  margin: 0; /* Supprime les marges par défaut */
+  font-size: 14px; /* Assure une taille de police cohérente */
+  line-height: 1.5; /* Assure un interligne cohérent */
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  font-size: 14px; /* Assure une taille de police cohérente */
+  line-height: 1.5; /* Assure un interligne cohérent */
+}
+
+.terminal-input-line span {
+  margin-right: 5px;
+  color: #d4d4d4; /* Couleur du texte */
+  font-size: 14px; /* Assure une taille de police cohérente */
+}
+
+.terminal-content input {
+  background: none;
+  border: none;
+  color: #d4d4d4; /* Couleur du texte */
+  font-family: 'Courier New', Courier, monospace;
+  outline: none;
+  flex-grow: 1;
+  caret-color: #d4d4d4; /* Couleur du curseur */
+  font-size: 14px; /* Assure une taille de police cohérente */
+  line-height: 1.5; /* Assure un interligne cohérent */
+}
+
+.terminal-content input::placeholder {
+  color: #d4d4d4;
+  opacity: 1;
+}
+
+/* Styles pour la barre de défilement */
+.terminal-content::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+}
+
+.terminal-content::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Couleur de fond de la piste */
+    border-radius: 10px; /* Arrondir les coins de la piste */
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+    background-color: #555; /* Couleur de la poignée */
+    border-radius: 20px; /* Arrondir les coins de la poignée */
+    border: 2px solid #1e1e1e; /* Ajouter une bordure pour créer un espace autour de la poignée */
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #888; /* Couleur de la poignée au survol */
+}
+/* Styles pour Firefox */
+.terminal-content {
+  scrollbar-width: thin; /* Largeur de la barre de défilement */
+  scrollbar-color: #555 #1e1e1e; /* Couleur de la poignée et de la piste */
 }

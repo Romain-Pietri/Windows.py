@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Terminal from './Terminal';
 
 const Desktop: React.FC = () => {
+    const [showTerminal, setShowTerminal] = useState(false);
+
+    const handleOpenTerminal = () => {
+        setShowTerminal(true);
+    };
+
+    const handleCloseTerminal = () => {
+        setShowTerminal(false);
+    };
+
     return (
         <div className="desktop">
-            <div className="icon">My Computer</div>
-            <div className="icon">Documents</div>
-            <div className="icon">Recycle Bin</div>
-            <div className="window">
-                <h2>Window Title</h2>
-                <p>This is a sample window content.</p>
-            </div>
+            <div className="icon" onClick={handleOpenTerminal}>Terminal</div>
+            {showTerminal && <Terminal onClose={handleCloseTerminal} />}
         </div>
     );
 };
