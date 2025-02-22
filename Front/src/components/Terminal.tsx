@@ -7,7 +7,9 @@ interface TerminalProps {
 const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState<string[]>(['Bienvenue dans le terminal. Tapez une commande et appuyez sur Entrée.']);
+    const [directory, setDirectory] = useState('/');
     const inputRef = useRef<HTMLInputElement>(null);
+    const userid = "0";
 
     useEffect(() => {
         if (inputRef.current) {
@@ -21,16 +23,17 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
 
     const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            setOutput([...output, `$ ${input}`]);
+            setOutput([...output, `$ ${directory} ${input}`]);
             try {
                 const response = await fetch('http://localhost:8000/api/command/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ command: input }),
+                    body: JSON.stringify({ command: input, directory: directory, userid: userid }),
                 });
                 const data = await response.json();
+                setDirectory(data.directory);
                 setOutput((prevOutput) => [...prevOutput, data.result]);
             } catch (error) {
                 setOutput((prevOutput) => [...prevOutput, 'Error: Unable to fetch data']);
@@ -56,21 +59,31 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
         }
     };
 
+    const handleClick = () => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
+
     return (
-        <div className="terminal">
+        <div className="terminal" onClick={handleClick}>
             <div className="terminal-output">
                 {output.map((line, index) => (
                     <div key={index}>{line}</div>
                 ))}
             </div>
-            <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress}
-                className="terminal-input"
-            />
+            <div className="terminal-input-line">
+                <span>$ {directory} </span>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyPress}
+                    className="terminal-input"
+                />
+                <div className="terminal-cursor"></div>
+            </div>
         </div>
     );
 };
