@@ -8,9 +8,7 @@ interface TerminalProps {
 const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState<string[]>(['Bienvenue dans le terminal. Tapez une commande et appuyez sur Entrée.']);
-    const [directory, setDirectory] = useState('/');
     const inputRef = useRef<HTMLInputElement>(null);
-    const userid = "0";
 
     useEffect(() => {
         if (inputRef.current) {
@@ -24,17 +22,16 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
 
     const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            setOutput([...output, `$ ${directory} ${input}`]);
+            setOutput([...output, `$ ${input}`]);
             try {
                 const response = await fetch('http://localhost:8000/api/command/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ command: input, directory: directory, userid: userid }),
+                    body: JSON.stringify({ command: input }),
                 });
                 const data = await response.json();
-                setDirectory(data.directory);
                 setOutput((prevOutput) => [...prevOutput, data.result]);
             } catch (error) {
                 setOutput((prevOutput) => [...prevOutput, 'Error: Unable to fetch data']);
@@ -67,7 +64,7 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
                     <p key={index}>{line}</p>
                 ))}
                 <div className="terminal-input-line">
-                    <span>$ {directory} </span>
+                    <span>$</span>
                     <input
                         type="text"
                         value={input}
