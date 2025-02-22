@@ -164,3 +164,44 @@ body, html {
   scrollbar-width: thin; /* Largeur de la barre de défilement */
   scrollbar-color: #555 #1e1e1e; /* Couleur de la poignée et de la piste */
 }
+
+.terminal {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    overflow: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Permet de conserver les sauts de ligne */
+}
+
+.terminal-input {
+    border: none;
+    background: none;
+    color: white;
+    outline: none;
+    font-family: monospace;
+    font-size: 14px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.terminal-input-line span {
+    margin-right: 5px;
+}

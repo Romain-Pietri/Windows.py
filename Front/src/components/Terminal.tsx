@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Window from './Window';
 
 interface TerminalProps {
     onClose: () => void;
@@ -58,24 +57,21 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
     };
 
     return (
-        <Window onClose={onClose} title="Terminal">
-            <div className="terminal-content">
+        <div className="terminal">
+            <div className="terminal-output">
                 {output.map((line, index) => (
-                    <p key={index}>{line}</p>
+                    <div key={index}>{line}</div>
                 ))}
-                <div className="terminal-input-line">
-                    <span>$</span>
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={handleInputChange}
-                        onKeyDown={handleKeyPress}
-                        ref={inputRef}
-                        autoFocus
-                    />
-                </div>
             </div>
-        </Window>
+            <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyPress}
+                className="terminal-input"
+            />
+        </div>
     );
 };
 
