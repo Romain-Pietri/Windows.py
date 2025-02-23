@@ -186,15 +186,14 @@ class FakeShell():
         """
         Supprime récursivement tous les fichiers et dossiers contenus dans un dossier
         """
-        self.cursor.execute("SELECT name, type FROM files WHERE parent=? AND owner=?", (self.current_directory + directory + "/", self.userid))
+        self.cursor.execute("SELECT name, type FROM files WHERE parent=? AND owner=?", (self.current_directory + directory , self.userid))
         contents = self.cursor.fetchall()
-        
         for name, type_ in contents:
             if type_ == 'file':
-                self.cursor.execute("DELETE FROM files WHERE name=? AND parent=? AND owner=? AND type='file'", (name, self.current_directory + directory + "/", self.userid))
+                self.cursor.execute("DELETE FROM files WHERE name=? AND parent=? AND owner=? AND type='file'", (name, self.current_directory + directory , self.userid))
             elif type_ == 'directory':
                 self._delete_directory_contents(directory + "/" + name)
-                self.cursor.execute("DELETE FROM files WHERE name=? AND parent=? AND owner=? AND type='directory'", (name, self.current_directory + directory + "/", self.userid))
+                self.cursor.execute("DELETE FROM files WHERE name=? AND parent=? AND owner=? AND type='directory'", (name, self.current_directory + directory , self.userid))
         
         self.conn.commit()
     
@@ -234,7 +233,7 @@ class FakeShell():
             # Récupère le contenu du fichier
             self.cursor.execute("SELECT content FROM files WHERE name=? AND parent=? AND owner=? AND type='file'", (filename, self.current_directory, self.userid))
             old_content = self.cursor.fetchone()[0]
-            new_content = old_content + content
+            new_content = content
             self.cursor.execute("UPDATE files SET content=? WHERE name=? AND parent=? AND owner=? AND type='file'", (new_content, filename, self.current_directory, self.userid))
             self.conn.commit()
             return f"Content added to {filename}"
