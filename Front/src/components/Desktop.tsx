@@ -33,7 +33,7 @@ const Desktop: React.FC = () => {
                 </Window>
             )}
             {showDoom && (
-                <Window title="DOOM" onClose={handleCloseDoom} width={1024} height={880}>
+                <Window title="DOOM" onClose={handleCloseDoom} width={680} height={720}>
                     <DoomComponent />
                 </Window>
             )}

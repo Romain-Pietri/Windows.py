@@ -5,3 +5,10 @@ Front/.env
 Front/node_modules/
 
 Backend/commands_history.db
+Backend/venv/
+
+
+
+Backend/Backend/__pycache__/
+
+Backend/DB.db
