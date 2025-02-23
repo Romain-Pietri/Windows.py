@@ -6,4 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/command/', execute_command),
     path('api/last_command/', get_last_command),
+    path('api/ip/', get_ip_address),
+    path('api/location/', get_location),
+    path('api/weather/', get_weather),
 ]
