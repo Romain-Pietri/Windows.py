@@ -12,7 +12,7 @@ my-os-simulator
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
-├── manage.py
+├── launch.py
 ├── requirements.txt
 ├── Frontend
 │   ├── public
@@ -62,15 +62,6 @@ To stop the development server, press `Ctrl+C` in the terminal where you excuted
 
 
 
-## Running the Application
-
-To start the development server, run:
-```
-python manage.py runserver
-```
-
-You can then access the application at `http://127.0.0.1:8000/`.
-
 ## Frontend Setup
 
 To set up the frontend, follow these steps:
@@ -91,6 +82,20 @@ To set up the frontend, follow these steps:
     ```
 
 4. Open your browser and go to `http://localhost:3000` to view the frontend application.
+
+
+## Backend Setup
+
+1. Navigate to the Backend directory:
+    ```
+    cd Backend
+    ```
+
+2. Install the required packages:
+    ```
+    pip install -r requirements.txt
+    ```
+
 
 ## Contributing
 
