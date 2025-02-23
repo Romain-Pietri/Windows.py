@@ -48,6 +48,20 @@ my-os-simulator
     pip install -r requirements.txt
     ```
 
+
+## Automatic Installation and launch :
+
+To automatically install dependencies and launch the application, you can use the provided `launch.py` script. This script will set up the virtual environment, install the required packages, and start both the backend and frontend servers.
+
+Run the following command:
+```
+python launch.py
+```
+
+To stop the development server, press `Ctrl+C` in the terminal where you excuted launch.py
+
+
+
 ## Running the Application
 
 To start the development server, run:

@@ -5,3 +5,7 @@ Front/.env
 Front/node_modules/
 
 Backend/commands_history.db
+
+# Ignorer les fichiers compilés Python
+__pycache__/
+*.pyc
