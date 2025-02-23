@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const DoomComponent: React.FC = () => {
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+
+    useEffect(() => {
+        const handleFocus = () => {
+            if (iframeRef.current) {
+                iframeRef.current.focus();
+            }
+        };
+
+        window.addEventListener('click', handleFocus);
+
+        return () => {
+            window.removeEventListener('click', handleFocus);
+        };
+    }, []);
+
     return (
         <div style={{ width: '100%', height: '100%', position: 'relative', display: 'flex', flexDirection: 'column' }}>
             <div style={{ backgroundColor: '#333', color: 'white', padding: '10px', fontFamily: 'monospace', fontSize: '12px' }}>
@@ -15,6 +31,7 @@ const DoomComponent: React.FC = () => {
             </div>
             <div style={{ flex: 1, position: 'relative', backgroundColor: '#111111' }}>
                 <iframe
+                    ref={iframeRef}
                     src="https://danihre.github.io/jsdoom/"
                     style={{ width: '100%', height: 'calc(100% - 50px)', border: 'none', position: 'absolute', top: 0, left: 0, background: 'black' }}
                     scrolling="no"
