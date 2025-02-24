@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Terminal from './Terminal';
 import DoomComponent from './DoomComponent';
 import Window from './Window';
+import Feed from "./Feed";
 import FileSystem from './FileSystem';
 
 import ImgTerminal from '../img/terminal.png';
@@ -12,16 +13,18 @@ import Whatapp from './Whatapp';
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
     const [showDoom, setShowDoom] = useState(false);
+    const [showFeed, setShowFeed] = useState(false);
     const [showFileSystem, setShowFileSystem] = useState(false);
     const [showWhatapp, setShowWhatapp] = useState(false);
 
-    const handleOpenTerminal = () => {
-        setShowTerminal(true);
-    };
+    const handleOpenTerminal = () => setShowTerminal(true);
+    const handleCloseTerminal = () => setShowTerminal(false);
+    
+    const handleOpenDoom = () => setShowDoom(true);
+    const handleCloseDoom = () => setShowDoom(false);
 
-    const handleCloseTerminal = () => {
-        setShowTerminal(false);
-    };
+    const handleOpenFeed = () => setShowFeed(true);
+    const handleCloseFeed = () => setShowFeed(false);
 
     const handleOpenDoom = () => {
         setShowDoom(true);
@@ -49,6 +52,8 @@ const Desktop: React.FC = () => {
 
     return (
         <div className="desktop">
+            <div className="icon" onClick={handleOpenFeed}>Flux d'actualités</div>
+
             <div className="icon" onClick={handleOpenFileSystem}><img src={ImgFichier} alt="Fichier Icon"/><p className="icon-name">Fichier</p></div>
             <div className="icon" onClick={handleOpenTerminal}><img src={ImgTerminal} alt="Terminal Icon"/><p className="icon-name">Terminal</p></div>
             <div className="icon" onClick={handleOpenDoom}><img src={ImgDoom} alt="Doom Icon"/><p className="icon-name">Doom</p></div>
@@ -70,6 +75,11 @@ const Desktop: React.FC = () => {
             {showDoom && (
                 <Window title="DOOM" onClose={handleCloseDoom} width={680} height={720}>
                     <DoomComponent />
+                </Window>
+            )}
+            {showFeed && (
+                <Window title="Flux d'actualités" onClose={handleCloseFeed} width={800} height={600}>
+                    <Feed />
                 </Window>
             )}
 

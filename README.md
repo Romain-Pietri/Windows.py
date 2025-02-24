@@ -12,9 +12,9 @@ my-os-simulator
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── asgi.py
-├── manage.py
+├── launch.py
 ├── requirements.txt
-├── Frontend
+├── Front
 │   ├── public
 │   │   ├── index.html         # The entry point of the web application.
 │   │   └── styles
@@ -27,6 +27,16 @@ my-os-simulator
 │   ├── package.json            # npm configuration file listing dependencies and scripts.
 │   ├── tsconfig.json           # TypeScript configuration file specifying compiler options.
 │   └── README.md               # Documentation for the frontend project.
+├── Backend
+│   ├── my_os_simulator
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   └── asgi.py
+│   ├── manage.py
+│   ├── requirements.txt
+│   └── README.md               # Documentation for the backend project.
 ```
 
 ## Installation
@@ -37,27 +47,23 @@ my-os-simulator
     cd my-os-simulator
     ```
 
-2. Create a virtual environment:
-    ```
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+2. Then you can choose automatic installation and setup or to manually setup yourself :
 
-3. Install the required packages:
-    ```
-    pip install -r requirements.txt
-    ```
+## Automatic Installation and launch :
 
-## Running the Application
+To automatically install dependencies and launch the application, you can use the provided `launch.py` script. This script will set up the virtual environment, install the required packages, and start both the backend and frontend servers.
 
-To start the development server, run:
+Run the following command:
 ```
-python manage.py runserver
+python launch.py
 ```
 
-You can then access the application at `http://127.0.0.1:8000/`.
+To stop the development server, press `Ctrl+C` in the terminal where you excuted launch.py
 
-## Frontend Setup
+
+
+## Manually Setup
+### Frontend Setup
 
 To set up the frontend, follow these steps:
 
@@ -77,6 +83,27 @@ To set up the frontend, follow these steps:
     ```
 
 4. Open your browser and go to `http://localhost:3000` to view the frontend application.
+
+
+### Backend Setup
+
+1. Navigate to the Backend directory:
+    ```
+    cd Backend
+    ```
+
+2. Install the required packages:
+    ```
+    pip install -r requirements.txt
+    ```
+
+3. Start the development server:
+    ```
+    python manage.py runserver
+    ```
+
+4. Open your browser and go to `http://localhost:8000` to view the backend application.
+
 
 ## Contributing
 
