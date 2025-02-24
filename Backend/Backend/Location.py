@@ -1,5 +1,7 @@
 import requests
 from .IpAdress import IpAdress
+import json
+from django.http import JsonResponse
 
 class Location():
     def __init__(self):
@@ -25,6 +27,16 @@ class Location():
         self.fetch_location()
         if self.error:
             return f"Erreur: {self.error}"
-        return f"{self.location.get('loc')}"
+        else:
+            coord = self.location.get("loc")
+            latitude, longitude = coord.split(",")
+            data = {"latitude": float(latitude), "longitude": float(longitude)}
+            print("coord : ", data)
+            print("lat : ", data["latitude"])
+            # return f"{data}"
+            return JsonResponse({'result': data})
+            # return data
+
+        
 
 

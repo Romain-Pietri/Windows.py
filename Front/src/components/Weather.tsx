@@ -9,13 +9,6 @@ interface TerminalProps {
     onClose: () => void;
 }
 
-// interface WeatherData {
-//     data_day: {
-//         temperature_max: number[];
-//         temperature_min: number[];
-//         weather: string[];
-//     };
-// }
 
 const Weather: React.FC<TerminalProps> = ({ onClose }) => {
     // const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -67,12 +60,6 @@ const Weather: React.FC<TerminalProps> = ({ onClose }) => {
           ) : (
             <p>Chargement des données...</p>
           )}
-          {/* {userIp && <p>Votre adresse IP: {userIp}</p>} */}
-          {/* {location ? (
-                <p>Votre localisation: Latitude: {location.latitude}, Longitude: {location.longitude}</p>
-            ) : (
-                <p>Chargement de la localisation...</p>
-            )} */}
             
             <IpAddressComponent2></IpAddressComponent2>
             <LocationComponent></LocationComponent>

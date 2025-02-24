@@ -72,7 +72,8 @@ body, html {
 .window-content {
   padding: 0; /* Supprime les marges internes */
   flex-grow: 1;
-  overflow: hidden; /* Empêche le débordement */
+  /* overflow: hidden; Empêche le débordement */
+  overflow: auto; /* Pour le scroll du Weather */
   display: flex;
   flex-direction: column;
 }

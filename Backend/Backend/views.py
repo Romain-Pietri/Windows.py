@@ -6,6 +6,8 @@ from .FakeShell import FakeShell
 from .IpAdress import IpAdress
 from .Location import Location
 from .Weather import Weather
+from .OpenWeather import OpenWeather
+from .OpenWeather2 import OpenWeather2
 @csrf_exempt
 def get_ip_address(request):
     ip_adress = IpAdress()
@@ -15,12 +17,51 @@ def get_ip_address(request):
 def get_location(request):
     location = Location()
     response = location.get_location_by_ip()
-    return JsonResponse({'result': response})
+    return response
+    # return JsonResponse({'result': response})
 @csrf_exempt
 def get_weather(request):
     weather = Weather()
     response = weather.get_weather()
     return JsonResponse({'result': response})
+# @csrf_exempt
+# def get_open_weather(request):
+#     open_weather = OpenWeather()
+#     # response = open_weather.get_current_time()
+#     response = open_weather.get_current_weather()
+#     return JsonResponse({'result': response})
+
+
+@csrf_exempt
+def get_open_weather(request):
+    """ Récupère et renvoie les données météorologiques sous forme de JSON. """
+    try:
+        open_weather = OpenWeather()
+        weather_data = open_weather.get_current_weather()
+
+        if not weather_data:
+            return JsonResponse({'error': 'Impossible de récupérer les données météo'}, status=500)
+
+        return JsonResponse({'result': weather_data})
+    
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+@csrf_exempt
+def get_open_weather2(request):
+    """ Récupère et renvoie les données météorologiques sous forme de JSON. """
+    try:
+        open_weather = OpenWeather2()
+        weather_data = open_weather.get_current_weather()
+
+        if not weather_data:
+            return JsonResponse({'error': 'Impossible de récupérer les données météo'}, status=500)
+
+        return JsonResponse({'result': weather_data})
+    
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
 @csrf_exempt
 def execute_command(request):#Fonction qui permet d'exécuter une commande dans le shell
     if request.method == 'POST':

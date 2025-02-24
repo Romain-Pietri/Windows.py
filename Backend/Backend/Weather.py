@@ -14,7 +14,7 @@ class Weather():
             latitude, longitude = loc.split(",")
 
             # URL de l'API
-            url = "https://my.meteoblue.com/packages/current_sunmoon"
+            url = "https://my.meteoblue.com/packages/current"
             params = {
                 "apikey": "qmdoYCl7DMcXxQIg",
                 "lat": latitude,
@@ -42,8 +42,9 @@ class Weather():
             print(self.error)
             return f"Erreur: {self.error}"
         else:
-            print("Self-Weather :\n", self.weather["metadata"], "\n\n")
-            return f"{self.weather["metadata"]}"
+            print("Self-Weather :\n", self.weather, "\n\n")
+            print("Self :\n", self.weather["metadata"]["latitude"], "\n\n")
+            return f"{self.weather}"
 
 
 # ['data_day']['moonrise']
