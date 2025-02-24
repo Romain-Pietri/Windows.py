@@ -3,6 +3,11 @@ import Terminal from './Terminal';
 import DoomComponent from './DoomComponent';
 import Window from './Window';
 import FileSystem from './FileSystem';
+
+import ImgTerminal from '../img/terminal.png';
+import ImgDoom from '../img/doom.png';
+import ImgFichier from '../img/fichier.png';
+
 import Whatapp from './Whatapp';
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -44,6 +49,10 @@ const Desktop: React.FC = () => {
 
     return (
         <div className="desktop">
+            <div className="icon" onClick={handleOpenFileSystem}><img src={ImgFichier} alt="Fichier Icon"/><p className="icon-name">Fichier</p></div>
+            <div className="icon" onClick={handleOpenTerminal}><img src={ImgTerminal} alt="Terminal Icon"/><p className="icon-name">Terminal</p></div>
+            <div className="icon" onClick={handleOpenDoom}><img src={ImgDoom} alt="Doom Icon"/><p className="icon-name">Doom</p></div>
+            
             <div className="icon" onClick={handleOpenFileSystem}>File System</div>
             <div className="icon" onClick={handleOpenTerminal}>Terminal</div>
             <div className="icon" onClick={handleOpenDoom}>Doom</div>

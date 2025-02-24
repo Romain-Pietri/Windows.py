@@ -22,17 +22,33 @@ body, html {
   padding: 10px;
 }
 
-.icon {
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  background-color: white;
+.icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;
+}
+  
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 50px 25px;
+}
+  
+.icon img {
+  width: 100px;
+  height: 100px;
   cursor: pointer;
 }
+  
+.icon-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+} 
 
 .window {
   width: 600px;
