@@ -48,7 +48,7 @@ subprocess.run("npm install", shell=True, cwd=FRONTEND_DIR)
 
 # Démarrage des serveurs
 print("\033[1m[🔥] Démarrage du backend...\033[0m")
-backend_process = run_command(f"{activate_script} && python Backend/manage.py runserver", cwd=BACKEND_DIR, env=env)
+backend_process = run_command(f"{activate_script} && python manage.py runserver", cwd=BACKEND_DIR, env=env)
 
 # Attendre que le backend démarre
 time.sleep(3)
