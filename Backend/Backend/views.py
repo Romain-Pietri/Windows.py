@@ -36,3 +36,16 @@ def get_last_command(request):#Fonction qui permet de récupérer la dernière c
         return JsonResponse({'result': response})
     return JsonResponse({'result': 'Invalid request method'})
 
+@csrf_exempt
+def get_news(request):
+    if request.method == 'GET':
+        try:
+            # Utilisation de la clé API depuis le fichier .env
+            url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}'
+            response = requests.get(url)
+            news_data = response.json()
+            return JsonResponse({'articles': news_data.get('articles', [])})
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching news: {e}")
+            return JsonResponse({'error': 'Erreur lors de la récupération des actualités'}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
