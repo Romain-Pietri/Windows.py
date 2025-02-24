@@ -26,6 +26,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* Permet le positionnement absolu de .icond */
 }
   
 .icon {
@@ -42,13 +43,39 @@ body, html {
   height: 100px;
   cursor: pointer;
 }
-  
+
+.icond {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 50px 50px;
+}
+ 
+.icond img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
 .icon-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+}
+  
+.icond .icon-name {
   margin-top: 10px;
   font-size: 14px;
   color: white;
   font-weight: bold;
-} 
+}
 
 .window {
   width: 600px;
