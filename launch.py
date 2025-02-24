@@ -36,24 +36,24 @@ env["VIRTUAL_ENV"] = VENV_PATH
 env["PATH"] = os.path.join(VENV_PATH, "bin") + os.pathsep + env["PATH"]
 
 # Installation des dépendances
-print("\033[1m[🚀] Installation des dépendances...\033[0m")
+print("\n\033[1m[🚀] Installation des dépendances... \033[0m")
 
 # Backend avec l'environnement virtuel
 print("\033[1m[🔧] Installation des dépendances backend...\033[0m")
 subprocess.run(f"{activate_script} && pip install -r requirements.txt", shell=True, cwd=BACKEND_DIR, env=env)
 
 # Frontend
-print("\033[1m[🔧] Installation des dépendances frontend...\033[0m")
+print("\033[1m[🔧] Installation des dépendances frontend... \033[0m")
 subprocess.run("npm install", shell=True, cwd=FRONTEND_DIR)
 
 # Démarrage des serveurs
-print("\033[1m[🔥] Démarrage du backend...\033[0m")
+print("\n\033[1m[🔥] Démarrage du backend... \n \033[0m")
 backend_process = run_command(f"{activate_script} && python manage.py runserver", cwd=BACKEND_DIR, env=env)
 
 # Attendre que le backend démarre
 time.sleep(3)
 
-print("\033[1m[⚡] Démarrage du frontend...\033[0m")
+print("\n\033[1m[⚡] Démarrage du frontend...\n \033[0m")
 frontend_process = run_command("npm run start", cwd=FRONTEND_DIR)
 
 # Attendre que le front démarre
@@ -70,6 +70,11 @@ try:
     frontend_process.wait()
 except KeyboardInterrupt:
     print("\n\033[1m[🛑] Arrêt des processus...\033[0m")
-    backend_process.terminate()
-    frontend_process.terminate()
-    print("\033[1m[✅] Tout est arrêté proprement.\033[0m")
+    try:
+        backend_process.terminate()
+        frontend_process.terminate()
+        print("\033[1m[✅] Tout est arrêté proprement.\033[0m")
+    except Exception as error:
+        print(f"\033[1m[❌] Erreur lors de l'arrêt des processus: \n {error}\033[0m")
+        sys.exit(1)
+
