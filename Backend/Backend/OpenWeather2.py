@@ -18,19 +18,25 @@ class OpenWeather2:
         try:
             # Récupérer la position de l'utilisateur via une API d'IP
             location_response = Location().get_location_by_ip()
-            location_data = json.loads(location_response.content.decode('utf-8'))
-            self.latitude = location_data["result"]["latitude"]
-            self.longitude = location_data["result"]["longitude"]
+            location_data = location_response
+            print(location_data)
+            latitude = location_data["latitude"]
+            longitude = location_data["longitude"]
+            self.latitude = latitude
+            self.longitude = longitude
+            print("laaatitude:", self.latitude)
+            print("longitude:", self.longitude)
 
             # Construire l'URL de requête Open-Meteo
             url = "https://api.open-meteo.com/v1/forecast"
             params = {
                 "latitude": self.latitude,
                 "longitude": self.longitude,
-                "current": "temperature_2m",
+                "current": ["temperature_2m", "weather_code", "wind_speed_10m"],
                 "hourly": ["temperature_2m", "precipitation_probability", "weather_code", "wind_speed_10m"],
-                "daily": ["temperature_2m_max", "temperature_2m_min"],
-                "timezone": "auto"  # Auto pour détecter le bon fuseau horaire
+                "daily": ["temperature_2m_max", "temperature_2m_min", "weather_code"],
+                "timezone": "auto",  # Auto pour détecter le bon fuseau horaire
+                "timeformat": "unixtime"
             }
 
             # Envoyer la requête API
@@ -55,6 +61,8 @@ class OpenWeather2:
                 "utc_offset_seconds": weather_data["utc_offset_seconds"],
                 "current": {
                     "temperature_2m": weather_data["current"]["temperature_2m"],
+                    "weather_code": weather_data["current"]["weather_code"],
+                    "wind_speed_10m": weather_data["current"]["wind_speed_10m"],
                     "time": weather_data["current"]["time"]
                 },
                 "hourly": {
@@ -67,7 +75,8 @@ class OpenWeather2:
                 "daily": {
                     "time": weather_data["daily"]["time"],
                     "temperature_2m_max": weather_data["daily"]["temperature_2m_max"],
-                    "temperature_2m_min": weather_data["daily"]["temperature_2m_min"]
+                    "temperature_2m_min": weather_data["daily"]["temperature_2m_min"],
+                    "weather_code": weather_data["daily"]["weather_code"]
                 },
                 "hourly_units": {
                     "temperature_2m": weather_data["hourly_units"]["temperature_2m"]

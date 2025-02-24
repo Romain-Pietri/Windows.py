@@ -34,7 +34,12 @@ class Location():
             print("coord : ", data)
             print("lat : ", data["latitude"])
             # return f"{data}"
-            return JsonResponse({'result': data})
+            # return JsonResponse({'result': data})
+            return {
+                "latitude": float(latitude),
+                "longitude": float(longitude),
+                "city": self.location["city"],
+            }
             # return data
 
         

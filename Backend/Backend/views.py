@@ -17,7 +17,8 @@ def get_ip_address(request):
 def get_location(request):
     location = Location()
     response = location.get_location_by_ip()
-    return response
+    # return response
+    return JsonResponse(response)
     # return JsonResponse({'result': response})
 @csrf_exempt
 def get_weather(request):

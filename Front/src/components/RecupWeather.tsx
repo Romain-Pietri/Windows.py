@@ -1,17 +1,50 @@
 import React, { useState, useEffect } from 'react';
 
 
-// interface WeatherResult {
-//     temperature_2m: number;
-//     is_day: number;
-//     precipitation: number;
-//     time: string;
-//     daylight_duration: number;
-// }
 
-// interface ApiResponse {
-//     result: WeatherResult;
-// }
+interface TimestampProps {
+  timestamp: string;
+  dateBool: boolean;
+  timeBool: boolean;
+}
+
+const Timestamp: React.FC<TimestampProps> = ({ timestamp, dateBool, timeBool }) => {
+  // Convertir le timestamp Unix en millisecondes
+  const date = new Date(parseInt(timestamp, 10) * 1000);
+
+  // Extraire l'année, le mois et le jour
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() retourne un index de 0 à 11
+  const day = date.getDate().toString().padStart(2, '0');
+
+  // Extraire les heures et les minutes
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  // Formater la date
+  const formattedDate = `${day}/${month}/${year}`;
+
+  // Formater l'heure
+  const formattedTime = `${hours}:${minutes}`;
+
+  if (dateBool && timeBool) {
+    return <span>{formattedDate} - {formattedTime}</span>;
+  }
+
+  else if (dateBool) {
+    return <span>{formattedDate}</span>;
+  }
+
+  else if (timeBool) {
+    return <span>{formattedTime}</span>;
+  }
+
+  else {
+    return <span></span>
+  }
+
+};
+
 
 interface WeatherData {
     result: {
@@ -24,11 +57,14 @@ interface WeatherData {
       utc_offset_seconds: number;
       current: CurrentWeather;
       hourly: HourlyWeather;
+      daily: DailyWeather;
     };
   }
   
   interface CurrentWeather {
     temperature_2m: number;
+    weather_code: number;
+    wind_speed_10m: number;
     time: string;
   }
   
@@ -37,18 +73,49 @@ interface WeatherData {
     temperature_2m: number[];
     precipitation_probability: number[];
     weather_code: number[];
+    wind_speed_10m: number[];
+  }
+
+  interface DailyWeather {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    weather_code: number[];
   }
   
     
   const AffichagePrevisionsTemp: React.FC<{ weatherData: WeatherData }> = ({ weatherData }) => {
     return (
+      
       <div>
-        <h2>Prévisions de température</h2>
+        <h2>Météo actuelle</h2>
+        
+        <Timestamp timestamp={weatherData.result.current.time} dateBool={false} timeBool={true} />
+          
+        <p>Température: {weatherData.result.current.temperature_2m}°C</p>
+        <WeatherIcon code={weatherData.result.current.weather_code} isDay={true} ></WeatherIcon>
+        <p>Vitesse du vent: {weatherData.result.current.wind_speed_10m} km/h</p>
+
+        <h2>Prévisions pour la journée du <Timestamp timestamp={weatherData.result.hourly.time[0]} dateBool={true} timeBool={false} /></h2>
         <ul>
-          {weatherData.result.hourly.time.map((heure, i) => (
+          {weatherData.result.hourly.time.slice(0,24).map((heure, i) => (
             <li key={i}>
-              Heure: {heure} - Température: {weatherData.result.hourly.temperature_2m[i]}°C
+              Heure: <Timestamp timestamp={heure} dateBool={false} timeBool={true} /> - Température: {weatherData.result.hourly.temperature_2m[i]}°C
+              - Précipitation : {weatherData.result.hourly.precipitation_probability[i]}%
               <WeatherIcon code={weatherData.result.hourly.weather_code[i]} isDay={false} ></WeatherIcon>
+              
+            </li>
+          ))}
+        </ul>
+
+        <h2>Prévisions pour la semaine</h2>
+        <ul>
+          {weatherData.result.daily.time.map((heure, i) => (
+            <li key={i}>
+              Jour: <Timestamp timestamp={heure} dateBool={true} timeBool={false} /> -
+              T° min: {weatherData.result.daily.temperature_2m_min[i]}°C -
+              T° max: {weatherData.result.daily.temperature_2m_max[i]}°C -
+              <WeatherIcon code={weatherData.result.daily.weather_code[i]} isDay={false} ></WeatherIcon>
             </li>
           ))}
         </ul>
@@ -184,7 +251,7 @@ interface WeatherData {
       emoji = '❓';
   }
 
-  return <div>{emoji} {description}</div>;
+  return <span>{emoji} {description}</span>;
   };
   
 //   export default AffichagePrevisionsTemp;

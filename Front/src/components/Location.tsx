@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-interface Coord {
+interface CooLocResponserd {
   latitude: number;
   longitude: number;
+  city: string;
 }
 
-interface LocResponse {
-  result: Coord;
-}
 
 const LocationComponent: React.FC = () => {
-  const [location, setLocation] = useState<LocResponse| null>(null);
+  const [location, setLocation] = useState<CooLocResponserd| null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,9 +22,6 @@ const LocationComponent: React.FC = () => {
         }
 
         const data = await response.json();
-        console.log("DataLoc:", data);
-        console.log("DataLocLat:", data.result.latitude);
-        console.log("DataLocLon:", data.result.longitude);
         setLocation(data);
       } catch (err: unknown) {
         if (err instanceof Error) {
@@ -56,8 +51,9 @@ const LocationComponent: React.FC = () => {
         {location ? ( // Vérifie si weatherData est non null
               <>
                   <h2>Votre localisation</h2>
-                  <p>Latitude : {location.result.latitude}</p>
-                  <p>Longitude : {location.result.longitude}</p>
+                  <p>Latitude : {location.latitude}</p>
+                  <p>Longitude : {location.longitude}</p>
+                  <p>Ville : {location.city}</p>
               </>
           ) : (
               <p>No location data available.</p>
