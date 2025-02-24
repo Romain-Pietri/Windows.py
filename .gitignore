@@ -9,3 +9,5 @@ Backend/commands_history.db
 # Ignorer les fichiers compilés Python
 __pycache__/
 *.pyc
+# Ignorer l'environnement virtuel Python dans Backend
+Backend/venv/
