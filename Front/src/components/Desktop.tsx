@@ -3,10 +3,12 @@ import Terminal from './Terminal';
 import DoomComponent from './DoomComponent';
 import Window from './Window';
 import FileSystem from './FileSystem';
+import Whatapp from './Whatapp';
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
     const [showDoom, setShowDoom] = useState(false);
     const [showFileSystem, setShowFileSystem] = useState(false);
+    const [showWhatapp, setShowWhatapp] = useState(false);
 
     const handleOpenTerminal = () => {
         setShowTerminal(true);
@@ -32,11 +34,22 @@ const Desktop: React.FC = () => {
         setShowFileSystem(false);
     }
 
+    const handleOpenWhatapp = () => {
+        setShowWhatapp(true);
+    }
+
+    const handleCloseWhatapp = () => {
+        setShowWhatapp(false);
+    }
+
     return (
         <div className="desktop">
             <div className="icon" onClick={handleOpenFileSystem}>File System</div>
             <div className="icon" onClick={handleOpenTerminal}>Terminal</div>
             <div className="icon" onClick={handleOpenDoom}>Doom</div>
+            <div className="icon" onClick={handleOpenWhatapp}>Whatapp</div>
+            
+            
 
             {showFileSystem && (
                 <Window title="File System" onClose={handleCloseFileSystem} width={800} height={600}>
@@ -51,6 +64,12 @@ const Desktop: React.FC = () => {
             {showDoom && (
                 <Window title="DOOM" onClose={handleCloseDoom} width={680} height={720}>
                     <DoomComponent />
+                </Window>
+            )}
+
+            {showWhatapp && (
+                <Window title="Whatapp" onClose={handleCloseWhatapp} width={800} height={600}>
+                    <Whatapp />
                 </Window>
             )}
         </div>

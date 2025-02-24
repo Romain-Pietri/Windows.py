@@ -337,3 +337,138 @@ textarea {
     font-size: 24px;
     cursor: pointer;
 }
+
+.whatapp {
+  display: flex;
+  height: 100vh;
+}
+
+.whatapp__sidebar {
+  width: 30%;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.whatapp__sidebar h2 {
+  margin-top: 0;
+}
+
+.whatapp__sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.whatapp__sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.whatapp__sidebar li:hover {
+  background-color: #e0e0e0;
+}
+
+.whatapp__newChat {
+  margin-top: 20px;
+}
+
+.whatapp__newChat input {
+  width: calc(100% - 110px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.whatapp__newChat button {
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.whatapp__newChat button:hover {
+  background-color: #005a9e;
+}
+
+.whatapp__chat {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.whatapp__chatHeader {
+  background-color: #0078d4;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.whatapp__chatBody {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.whatapp__message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  max-width: 60%;
+}
+
+.whatapp__message.sent {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  text-align: right;
+  margin-left: auto; /* Ajouté pour aligner à droite */
+}
+
+.whatapp__message.received {
+  background-color: #ffffff;
+  align-self: flex-start;
+  text-align: left;
+  margin-right: auto; /* Ajouté pour aligner à gauche */
+}
+
+.whatapp__chatFooter {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.whatapp__chatFooter input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.whatapp__chatFooter button {
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.whatapp__chatFooter button:hover {
+  background-color: #005a9e;
+}
+
+.whatapp__noChat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-color: #f9f9f9;
+}

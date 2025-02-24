@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 import subprocess
 import json
 from .FakeShell import FakeShell
+from .WhatApps import WhatApps
+
 @csrf_exempt
 def execute_command(request):#Fonction qui permet d'exécuter une commande dans le shell
     if request.method == 'POST':
@@ -34,5 +36,37 @@ def get_last_command(request):#Fonction qui permet de récupérer la dernière c
         response=shell.last_command()
         print(response)
         return JsonResponse({'result': response})
+    return JsonResponse({'result': 'Invalid request method'})
+@csrf_exempt
+def send_message(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        print("Received message:", body)
+        user1 = body.get('user1')
+        user2 = body.get('user2')
+        message = body.get('message')
+        whosend = body.get('whosend')
+        whatapps = WhatApps()
+        whatapps.insert(user1, user2, message, whosend)
+        return JsonResponse({'result': 'Message sent'})
+    return JsonResponse({'result': 'Invalid request method'})
+@csrf_exempt
+def get_message(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        user1 = body.get('user1')
+        user2 = body.get('user2')
+        whatapps = WhatApps()
+        messages = whatapps.get(user1, user2)
+        return JsonResponse({'result': messages})
+    return JsonResponse({'result': 'Invalid request method'})
+@csrf_exempt
+def get_conversation(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        user1 = body.get('user1')
+        whatapps = WhatApps()
+        conversations = whatapps.getConversation(user1)
+        return JsonResponse({'result': conversations})
     return JsonResponse({'result': 'Invalid request method'})
 
