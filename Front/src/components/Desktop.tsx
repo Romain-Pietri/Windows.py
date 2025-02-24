@@ -9,6 +9,7 @@ import ImgTerminal from '../img/terminal.png';
 import ImgDoom from '../img/doom.png';
 import ImgFichier from '../img/fichier.png';
 import ImgWhatApps from '../img/whatsapp.png';
+import ImgFeed from '../img/feed.png';
 import Whatapp from './Whatapp';
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -20,8 +21,7 @@ const Desktop: React.FC = () => {
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
     
-    const handleOpenDoom = () => setShowDoom(true);
-    const handleCloseDoom = () => setShowDoom(false);
+
 
     const handleOpenFeed = () => setShowFeed(true);
     const handleCloseFeed = () => setShowFeed(false);
@@ -52,12 +52,12 @@ const Desktop: React.FC = () => {
 
     return (
         <div className="desktop">
-            <div className="icon" onClick={handleOpenFeed}>Flux d'actualités</div>
-
+            
             <div className="icon" onClick={handleOpenFileSystem}><img src={ImgFichier} alt="Fichier Icon"/><p className="icon-name">Fichier</p></div>
             <div className="icon" onClick={handleOpenTerminal}><img src={ImgTerminal} alt="Terminal Icon"/><p className="icon-name">Terminal</p></div>
             <div className="icon" onClick={handleOpenDoom}><img src={ImgDoom} alt="Doom Icon"/><p className="icon-name">Doom</p></div>
             <div className="icon" onClick={handleOpenWhatapp}><img src={ImgWhatApps} alt="WhatApps Icon"/><p className="icon-name">WhatApps</p></div>
+            <div className="icon" onClick={handleOpenFeed}><img src={ImgFeed} alt="Feed Icon"/><p className="icon-name">Actualités</p></div>
             
             
             
