@@ -14,7 +14,7 @@ my-os-simulator
 │   └── asgi.py
 ├── launch.py
 ├── requirements.txt
-├── Frontend
+├── Front
 │   ├── public
 │   │   ├── index.html         # The entry point of the web application.
 │   │   └── styles
@@ -27,6 +27,16 @@ my-os-simulator
 │   ├── package.json            # npm configuration file listing dependencies and scripts.
 │   ├── tsconfig.json           # TypeScript configuration file specifying compiler options.
 │   └── README.md               # Documentation for the frontend project.
+├── Backend
+│   ├── my_os_simulator
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   └── asgi.py
+│   ├── manage.py
+│   ├── requirements.txt
+│   └── README.md               # Documentation for the backend project.
 ```
 
 ## Installation
@@ -37,17 +47,7 @@ my-os-simulator
     cd my-os-simulator
     ```
 
-2. Create a virtual environment:
-    ```
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
-
-3. Install the required packages:
-    ```
-    pip install -r requirements.txt
-    ```
-
+2. Then you can choose automatic installation and setup or to manually setup yourself :
 
 ## Automatic Installation and launch :
 
@@ -62,7 +62,8 @@ To stop the development server, press `Ctrl+C` in the terminal where you excuted
 
 
 
-## Frontend Setup
+## Manually Setup
+### Frontend Setup
 
 To set up the frontend, follow these steps:
 
@@ -84,7 +85,7 @@ To set up the frontend, follow these steps:
 4. Open your browser and go to `http://localhost:3000` to view the frontend application.
 
 
-## Backend Setup
+### Backend Setup
 
 1. Navigate to the Backend directory:
     ```
@@ -95,6 +96,13 @@ To set up the frontend, follow these steps:
     ```
     pip install -r requirements.txt
     ```
+
+3. Start the development server:
+    ```
+    python manage.py runserver
+    ```
+
+4. Open your browser and go to `http://localhost:8000` to view the backend application.
 
 
 ## Contributing

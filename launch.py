@@ -13,6 +13,12 @@ def run_command(command, cwd=None, env=None):
     """Exécute une commande shell."""
     return subprocess.Popen(command, cwd=cwd, shell=True, env=env)
 
+
+#verifier la version de python (il faut que ce soit 3.12)
+if sys.version_info < (3, 12):
+    print("\033[1m[⚠️] Python 3.12 ou supérieur est requis pour exécuter ce script.\033[0m")
+    sys.exit(1)
+
 # Vérifier si l'environnement virtuel existe
 if not os.path.exists(VENV_PATH):
     print("\033[1m[⚠️] Aucun environnement virtuel détecté, création de 'venv'...\033[0m")
@@ -29,7 +35,7 @@ env = os.environ.copy()
 env["VIRTUAL_ENV"] = VENV_PATH
 env["PATH"] = os.path.join(VENV_PATH, "bin") + os.pathsep + env["PATH"]
 
-# 🛠 Installation des dépendances
+# Installation des dépendances
 print("\033[1m[🚀] Installation des dépendances...\033[0m")
 
 # Backend avec l'environnement virtuel
@@ -40,9 +46,9 @@ subprocess.run(f"{activate_script} && pip install -r requirements.txt", shell=Tr
 print("\033[1m[🔧] Installation des dépendances frontend...\033[0m")
 subprocess.run("npm install", shell=True, cwd=FRONTEND_DIR)
 
-# 🎬 Démarrage des serveurs
+# Démarrage des serveurs
 print("\033[1m[🔥] Démarrage du backend...\033[0m")
-backend_process = run_command(f"{activate_script} && python manage.py runserver", cwd=BACKEND_DIR, env=env)
+backend_process = run_command(f"{activate_script} && python Backend/manage.py runserver", cwd=BACKEND_DIR, env=env)
 
 # Attendre que le backend démarre
 time.sleep(3)
@@ -51,7 +57,7 @@ print("\033[1m[⚡] Démarrage du frontend...\033[0m")
 frontend_process = run_command("npm run start", cwd=FRONTEND_DIR)
 
 # Attendre que le front démarre
-time.sleep(5)
+time.sleep(6)
 
 # 🌍 Ouvrir l'application dans le navigateur
 URL = "http://localhost:3000/"
