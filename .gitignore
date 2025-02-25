@@ -1,22 +1,15 @@
 env/
 Front/build/
 Front/.env
-
 Front/node_modules/
-
 Backend/commands_history.db
 Backend/venv/
-
 # Ignorer les fichiers compilés Python
 __pycache__/
 *.pyc
 # Ignorer l'environnement virtuel Python dans Backend
 Backend/venv/
-
-
 Backend/Backend/__pycache__/
 Backend/reports/*
 Backend/Backend/DB.db
-
-
 Backend/WhatAppDB.db
