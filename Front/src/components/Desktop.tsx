@@ -7,7 +7,7 @@ import FileSystem from './FileSystem';
 import Chatbot from './Chatbot';
 import Whatapp from './Whatapp';
 import Maigret from './Maigret';
-
+import Postit from './Postit';
 
 import ImgTerminal from '../img/terminal.png';
 import ImgDoom from '../img/doom.png';
@@ -17,6 +17,7 @@ import ImgFeed from '../img/feed.png';
 import ImgChatbot from '../img/chatbot.png';
 import ImgMaigret from '../img/maigret.png';
 
+
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
     const [showDoom, setShowDoom] = useState(false);
@@ -25,6 +26,7 @@ const Desktop: React.FC = () => {
     const [showWhatapp, setShowWhatapp] = useState(false);
     const [showChatbot, setShowChatbot] = useState(false);
     const [showHarvester, setShowHarvester] = useState(false);
+    const [showPostit, setShowPostit] = useState(false);
 
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
@@ -61,6 +63,8 @@ const Desktop: React.FC = () => {
     const handleOpenHarvester = () => setShowHarvester(true);
     const handleCloseHarvester = () => setShowHarvester(false);
 
+    const handleOpenPostit = () => setShowPostit(true);
+    const handleClosePostit = () => setShowPostit(false);
     return (
         <div className="desktop">
             
@@ -74,6 +78,13 @@ const Desktop: React.FC = () => {
                 <img src={ImgMaigret} alt="Maigret Icon" style={{ borderRadius: '10%' }}/>
                 <p className="icon-name">Maigret</p>
             </div>
+            
+            <div className="icon" onClick={handleOpenPostit}><img src={ImgFichier} alt="Postit Icon"/><p className="icon-name">Postit</p></div>
+            {showPostit && (
+                <Window title="Postit"  onClose={handleClosePostit} width={400} height={400}>
+                    <Postit />
+                </Window>
+            )}
 
 
             {showFileSystem && (

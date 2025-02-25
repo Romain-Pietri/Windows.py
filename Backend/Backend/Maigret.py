@@ -4,7 +4,7 @@ import csv
 def search_username(username):
     print(username)
     # fait une recherche sur le nom d'utilisateur grace a la commande maigret 
-    os.system(f"maigret --no-color --no-progressbar -C {username}")
+    os.system(f"maigret --no-recursion  --no-extracting --no-color --no-progressbar -C {username}")
     
     # recupere le resultat a la fin de la recherche
     result = []
