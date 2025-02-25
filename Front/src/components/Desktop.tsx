@@ -16,7 +16,7 @@ import ImgWhatApps from '../img/whatsapp.png';
 import ImgFeed from '../img/feed.png';
 import ImgChatbot from '../img/chatbot.png';
 import ImgMaigret from '../img/maigret.png';
-
+import ImgPostit from '../img/postit.png';
 
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -79,7 +79,7 @@ const Desktop: React.FC = () => {
                 <p className="icon-name">Maigret</p>
             </div>
             
-            <div className="icon" onClick={handleOpenPostit}><img src={ImgFichier} alt="Postit Icon"/><p className="icon-name">Postit</p></div>
+            <div className="icon" onClick={handleOpenPostit}><img src={ImgPostit} alt="Postit Icon"/><p className="icon-name">Postit</p></div>
             {showPostit && (
                 <Window title="Postit"  onClose={handleClosePostit} width={400} height={400}>
                     <Postit />
