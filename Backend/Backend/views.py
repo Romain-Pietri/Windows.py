@@ -4,7 +4,7 @@ import subprocess
 import json
 from .FakeShell import FakeShell
 from .WhatApps import WhatApps
-
+from .Maigret import *
 @csrf_exempt
 def execute_command(request):#Fonction qui permet d'exécuter une commande dans le shell
     if request.method == 'POST':
@@ -70,3 +70,12 @@ def get_conversation(request):
         return JsonResponse({'result': conversations})
     return JsonResponse({'result': 'Invalid request method'})
 
+@csrf_exempt
+def get_user(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        user = body.get('user')
+        username = search_username(user)
+        print(username)
+        return JsonResponse({'result': list(username)})
+    return JsonResponse({'result': 'Invalid request method'})

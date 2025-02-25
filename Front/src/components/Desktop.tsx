@@ -6,6 +6,8 @@ import Feed from "./Feed";
 import FileSystem from './FileSystem';
 import Chatbot from './Chatbot';
 import Whatapp from './Whatapp';
+import Maigret from './Maigret';
+
 
 import ImgTerminal from '../img/terminal.png';
 import ImgDoom from '../img/doom.png';
@@ -13,6 +15,7 @@ import ImgFichier from '../img/fichier.png';
 import ImgWhatApps from '../img/whatsapp.png';
 import ImgFeed from '../img/feed.png';
 import ImgChatbot from '../img/chatbot.png';
+import ImgMaigret from '../img/maigret.png';
 
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -21,6 +24,7 @@ const Desktop: React.FC = () => {
     const [showFileSystem, setShowFileSystem] = useState(false);
     const [showWhatapp, setShowWhatapp] = useState(false);
     const [showChatbot, setShowChatbot] = useState(false);
+    const [showHarvester, setShowHarvester] = useState(false);
 
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
@@ -54,6 +58,8 @@ const Desktop: React.FC = () => {
     const handleCloseWhatapp = () => {
         setShowWhatapp(false);
     }
+    const handleOpenHarvester = () => setShowHarvester(true);
+    const handleCloseHarvester = () => setShowHarvester(false);
 
     return (
         <div className="desktop">
@@ -64,8 +70,11 @@ const Desktop: React.FC = () => {
             <div className="icon" onClick={handleOpenWhatapp}><img src={ImgWhatApps} alt="WhatApps Icon"/><p className="icon-name">WhatApps</p></div>
             <div className="icon" onClick={handleOpenFeed}><img src={ImgFeed} alt="Feed Icon"/><p className="icon-name">Actualités</p></div>
             <div className="icond" onClick={handleOpenChatbot}><img src={ImgChatbot} alt="Chatbot Icon"/><p className="icon-name">Chatbot</p></div>
-            
-            
+            <div className="icon" onClick={handleOpenHarvester}>
+                <img src={ImgMaigret} alt="Maigret Icon" style={{ borderRadius: '10%' }}/>
+                <p className="icon-name">Maigret</p>
+            </div>
+
 
             {showFileSystem && (
                 <Window title="File System" onClose={handleCloseFileSystem} width={800} height={600}>
@@ -94,9 +103,16 @@ const Desktop: React.FC = () => {
                 </Window>
             )}
 
+
             {showChatbot && (
                 <Window title="Chatbot" onClose={handleCloseChatbot} width={800} height={600}>
                     <Chatbot />
+                </Window>
+            )}
+
+            {showHarvester && (
+                <Window title="Maigret" onClose={handleCloseHarvester} width={800} height={600}>
+                    <Maigret onClose={handleCloseHarvester} />
                 </Window>
             )}
         </div>

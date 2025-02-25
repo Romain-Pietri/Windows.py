@@ -15,7 +15,8 @@ Backend/venv/
 
 
 Backend/Backend/__pycache__/
+Backend/reports/*
+Backend/Backend/DB.db
 
-Backend/DB.db
 
 Backend/WhatAppDB.db

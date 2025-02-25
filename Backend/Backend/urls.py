@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/send_message/', send_message),
     path('api/get_message/', get_message),
     path('api/get_conversation/', get_conversation),
+    path('api/get_user/', get_user),
 
 ]
