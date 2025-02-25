@@ -8,6 +8,7 @@ import Chatbot from './Chatbot';
 import Whatapp from './Whatapp';
 import Maigret from './Maigret';
 import Postit from './Postit';
+import Youtube from './Youtube';
 
 import ImgTerminal from '../img/terminal.png';
 import ImgDoom from '../img/doom.png';
@@ -17,6 +18,8 @@ import ImgFeed from '../img/feed.png';
 import ImgChatbot from '../img/chatbot.png';
 import ImgMaigret from '../img/maigret.png';
 import ImgPostit from '../img/postit.png';
+import ImgYoutube from '../img/youtube.png';
+
 
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -27,6 +30,10 @@ const Desktop: React.FC = () => {
     const [showChatbot, setShowChatbot] = useState(false);
     const [showHarvester, setShowHarvester] = useState(false);
     const [showPostit, setShowPostit] = useState(false);
+    const [showYoutube, setShowYoutube] = useState(false);
+
+    const handleOpenYoutube = () => setShowYoutube(true);
+    const handleCloseYoutube = () => setShowYoutube(false);
 
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
@@ -79,7 +86,15 @@ const Desktop: React.FC = () => {
                 <p className="icon-name">Maigret</p>
             </div>
             
-            <div className="icon" onClick={handleOpenPostit}><img src={ImgPostit} alt="Postit Icon"/><p className="icon-name">Postit</p></div>
+            <div className="icon" onClick={handleOpenPostit}><img src={ImgPostit    } alt="Postit Icon"/><p className="icon-name">Postit</p></div>
+            <div className="icon" onClick={handleOpenYoutube}><img src={ImgYoutube} alt="Youtube Icon"/><p className="icon-name">Youtube</p></div>
+            
+            {showYoutube && (
+                <Window title="Youtube"  onClose={handleCloseYoutube} width={800} height={600}>
+                    <Youtube />
+                </Window>
+            )}
+
             {showPostit && (
                 <Window title="Postit"  onClose={handleClosePostit} width={400} height={400}>
                     <Postit />

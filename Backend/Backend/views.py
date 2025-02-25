@@ -1,3 +1,4 @@
+import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import subprocess
@@ -5,6 +6,15 @@ import json
 from .FakeShell import FakeShell
 from .WhatApps import WhatApps
 from .Maigret import *
+
+
+#importer la clé api dans le .env qui se trouve dans le dossier Backend/Backend
+import os
+from dotenv import load_dotenv
+load_dotenv()
+YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+
+
 @csrf_exempt
 def execute_command(request):#Fonction qui permet d'exécuter une commande dans le shell
     if request.method == 'POST':
@@ -29,6 +39,7 @@ def execute_command(request):#Fonction qui permet d'exécuter une commande dans 
             print(f"Error: {e}")
             return JsonResponse({'result': str(e)})
     return JsonResponse({'result': 'Invalid request method'})
+
 @csrf_exempt
 def get_last_command(request):#Fonction qui permet de récupérer la dernière commande exécutée dans le shell
     if request.method == 'GET':
@@ -37,6 +48,7 @@ def get_last_command(request):#Fonction qui permet de récupérer la dernière c
         print(response)
         return JsonResponse({'result': response})
     return JsonResponse({'result': 'Invalid request method'})
+
 @csrf_exempt
 def send_message(request):
     if request.method == 'POST':
@@ -50,6 +62,7 @@ def send_message(request):
         whatapps.insert(user1, user2, message, whosend)
         return JsonResponse({'result': 'Message sent'})
     return JsonResponse({'result': 'Invalid request method'})
+
 @csrf_exempt
 def get_message(request):
     if request.method == 'POST':
@@ -60,6 +73,7 @@ def get_message(request):
         messages = whatapps.get(user1, user2)
         return JsonResponse({'result': messages})
     return JsonResponse({'result': 'Invalid request method'})
+
 @csrf_exempt
 def get_conversation(request):
     if request.method == 'POST':
@@ -79,3 +93,18 @@ def get_user(request):
         print(username)
         return JsonResponse({'result': list(username)})
     return JsonResponse({'result': 'Invalid request method'})
+
+@csrf_exempt
+def search_youtube(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            query = body.get('query')
+            url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q={query}&key={YOUTUBE_API_KEY}'
+            response = requests.get(url)
+            data = response.json()
+            video_ids = [item['id']['videoId'] for item in data['items']]
+            return JsonResponse({'video_ids': video_ids})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    return JsonResponse({'error': 'Invalid request method'})
