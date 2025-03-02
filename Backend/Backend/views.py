@@ -6,13 +6,53 @@ import json
 from .FakeShell import FakeShell
 from .WhatApps import WhatApps
 from .Maigret import *
+from openai import OpenAI
 
+
+
+# Charger la clé OpenAI depuis les variables d'environnement
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 #importer la clé api dans le .env qui se trouve dans le dossier Backend/Backend
 import os
 from dotenv import load_dotenv
 load_dotenv()
 YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+@csrf_exempt
+def chatbot(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            user_message = body.get("message", "")
+
+            if not user_message:
+                return JsonResponse({"error": "Message vide"}, status=400)
+
+            # Vérifier si la clé API OpenAI est bien chargée
+            if not OPENAI_API_KEY:
+                return JsonResponse({"error": "Clé OpenAI manquante"}, status=500)
+
+            # Appel à l'API OpenAI
+
+            # Utilise le bon endpoint pour les modèles de type chat
+            response = client.chat.completions.create(model="gpt-3.5-turbo",  # Utilise le modèle correct
+            messages=[{"role": "user", "content": user_message}])
+
+            print("OpenAI response:", response)  # Ajoute un print pour inspecter la réponse
+
+            # Extraire la réponse du bot
+            bot_reply = response.choices[0].message.content
+            return JsonResponse({"reply": bot_reply})
+
+        except KeyError as e:
+            return JsonResponse({"error": f"Clé manquante dans la réponse: {str(e)}"}, status=500)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Méthode invalide"}, status=400)
 
 
 @csrf_exempt
@@ -32,7 +72,7 @@ def execute_command(request):#Fonction qui permet d'exécuter une commande dans 
             if(type(result)==tuple):#Si c'est un CD, on récupère le résultat et le nouveau répertoire courant
                 directory=result[1]
                 result=result[0]
-            
+
             print("Command result:", result)
             return JsonResponse({'result': result, 'directory': directory})
         except Exception as e:

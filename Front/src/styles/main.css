@@ -22,55 +22,89 @@ body, html {
   padding: 10px;
 }
 
+/* Conteneur général */
 .icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Permet le positionnement absolu de .icond */
+  position: relative; /* Important pour le positionnement absolu des éléments .icond */
+  height: 100vh; /* Prend toute la hauteur de l'écran */
 }
-  
+
+/* Styles pour les icônes à gauche */
 .icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 50px 25px;
+  margin: 20px 25px; /* Marge pour espacer les icônes */
 }
-  
+
+/* Icônes */
 .icon img {
   width: 100px;
   height: 100px;
   cursor: pointer;
 }
 
-.icond {
+/* Conteneur principal */
+.icon-container {
+  display: flex;
+  flex-direction: column; /* Aligner les éléments verticalement */
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Important pour le positionnement absolu des éléments .icond */
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+/* Styles pour les icônes à gauche */
+.icon {
+  display: flex;
+  flex-direction: column; /* Les icônes à gauche sont aussi en colonne */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 50px 20px; /* Marge pour espacer les icônes verticalement */
+}
+
+/* Icônes */
+.icon img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+/* Styles pour les icônes à droite */
+.icond-container {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0; /* Place les icônes à droite de l'écran */
+  top: 50%; /* Les centre verticalement */
+  transform: translateY(-50%); /* Centrage parfait verticalement */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icond {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 50px 50px;
+  margin: 20px 50px;
 }
- 
+
+/* Icônes à droite */
 .icond img {
   width: 100px;
   height: 100px;
   cursor: pointer;
 }
 
-.icon-name {
-    margin-top: 10px;
-    font-size: 14px;
-    color: white;
-    font-weight: bold;
-}
-  
-.icond .icon-name {
+/* Styles pour le texte sous les icônes */
+.icon-name, .icond .icon-name {
   margin-top: 10px;
   font-size: 14px;
   color: white;

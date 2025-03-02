@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/chatbot.css';
 
 const Chatbot: React.FC = () => {
   const [input, setInput] = useState("");
@@ -12,17 +13,17 @@ const Chatbot: React.FC = () => {
     setInput("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/chatbot", {
+      const response = await fetch("http://127.0.0.1:8000/api/chatbot/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.REACT_APP_CHAT_API_KEY}`
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: input })
-      });
+        body: JSON.stringify({ message: input }),
+    });
 
-      const data = await response.json();
-      setMessages([...newMessages, `Bot: ${data.reply}`]);
+    const data = await response.json();
+    console.log("Response data:", data);
+    setMessages([...newMessages, `Bot: ${data.reply}`]);    
     } catch (error) {
       console.error("Erreur lors de l'envoi du message", error);
     }
@@ -42,6 +43,7 @@ const Chatbot: React.FC = () => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+        placeholder="Posez-moi une question"  // Texte par défaut avant que l'utilisateur commence à écrire
       />
       <button onClick={handleSendMessage}>Send</button>
     </div>

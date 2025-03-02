@@ -75,20 +75,49 @@ const Desktop: React.FC = () => {
     return (
         <div className="desktop">
             
-            <div className="icon" onClick={handleOpenFileSystem}><img src={ImgFichier} alt="Fichier Icon"/><p className="icon-name">Fichier</p></div>
-            <div className="icon" onClick={handleOpenTerminal}><img src={ImgTerminal} alt="Terminal Icon"/><p className="icon-name">Terminal</p></div>
-            <div className="icon" onClick={handleOpenDoom}><img src={ImgDoom} alt="Doom Icon"/><p className="icon-name">Doom</p></div>
-            <div className="icon" onClick={handleOpenWhatapp}><img src={ImgWhatApps} alt="WhatApps Icon"/><p className="icon-name">WhatApps</p></div>
-            <div className="icon" onClick={handleOpenFeed}><img src={ImgFeed} alt="Feed Icon"/><p className="icon-name">Actualités</p></div>
-            <div className="icond" onClick={handleOpenChatbot}><img src={ImgChatbot} alt="Chatbot Icon"/><p className="icon-name">Chatbot</p></div>
-            <div className="icon" onClick={handleOpenHarvester}>
+            <div className="icon-container">
+            <div className="icon" onClick={handleOpenFileSystem}>
+                <img src={ImgFichier} alt="Fichier Icon"/>
+                <p className="icon-name">Fichier</p>
+            </div>
+            <div className="icon" onClick={handleOpenTerminal}>
+                <img src={ImgTerminal} alt="Terminal Icon"/>
+                <p className="icon-name">Terminal</p>
+            </div>
+            <div className="icon" onClick={handleOpenDoom}>
+                <img src={ImgDoom} alt="Doom Icon"/>
+                <p className="icon-name">Doom</p>
+            </div>
+            <div className="icon" onClick={handleOpenWhatapp}>
+                <img src={ImgWhatApps} alt="WhatApps Icon"/>
+                <p className="icon-name">WhatApps</p>
+            </div>
+            <div className="icon" onClick={handleOpenFeed}>
+                <img src={ImgFeed} alt="Feed Icon"/>
+                <p className="icon-name">Actualités</p>
+            </div>
+            </div>
+
+            <div className="icond-container">
+            <div className="icond" onClick={handleOpenChatbot}>
+                <img src={ImgChatbot} alt="Chatbot Icon"/>
+                <p className="icon-name">Chatbot</p>
+            </div>
+            <div className="icond" onClick={handleOpenHarvester}>
                 <img src={ImgMaigret} alt="Maigret Icon" style={{ borderRadius: '10%' }}/>
                 <p className="icon-name">Maigret</p>
             </div>
-            
-            <div className="icon" onClick={handleOpenPostit}><img src={ImgPostit    } alt="Postit Icon"/><p className="icon-name">Postit</p></div>
-            <div className="icon" onClick={handleOpenYoutube}><img src={ImgYoutube} alt="Youtube Icon"/><p className="icon-name">Youtube</p></div>
-            
+            <div className="icond" onClick={handleOpenPostit}>
+                <img src={ImgPostit} alt="Postit Icon"/>
+                <p className="icon-name">Postit</p>
+            </div>
+            <div className="icond" onClick={handleOpenYoutube}>
+                <img src={ImgYoutube} alt="Youtube Icon"/>
+                <p className="icon-name">Youtube</p>
+            </div>
+            </div>
+
+
             {showYoutube && (
                 <Window title="Youtube"  onClose={handleCloseYoutube} width={800} height={600}>
                     <Youtube />
@@ -131,7 +160,7 @@ const Desktop: React.FC = () => {
 
 
             {showChatbot && (
-                <Window title="Chatbot" onClose={handleCloseChatbot} width={800} height={600}>
+                <Window title="Chatbot" onClose={handleCloseChatbot} width={300} height={550}>
                     <Chatbot />
                 </Window>
             )}
