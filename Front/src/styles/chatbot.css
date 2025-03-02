@@ -1,4 +1,4 @@
-body {
+.chatbot body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -50,7 +50,7 @@ body {
   }
   
   /* Zone de saisie avec texte par défaut */
-  input {
+  .chatbot input {
     border: none;
     padding: 14px;
     font-size: 16px;
@@ -65,13 +65,13 @@ body {
   }
   
   /* Texte par défaut dans la zone de saisie */
-  input::placeholder {
+  .chatbot  input::placeholder {
     color: #999;
     font-style: italic;
   }
   
   /* Quand l'utilisateur commence à taper, la couleur du texte revient normale */
-  input:focus {
+  .chatbot input:focus {
     border-color: #1e88e5;
     background-color: #e8f5fe;
     box-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
@@ -79,7 +79,7 @@ body {
   }
   
   /* Bouton "Send" positionné à droite et plus arrondi */
-  button {
+  .chatbot button {
     background-color: #1e88e5;
     color: white;
     border: none;
@@ -97,17 +97,17 @@ body {
     align-items: center;
   }
   
-  button:hover {
+  .chatbot button:hover {
     background-color: #1565c0;
     transform: scale(1.05);
   }
   
-  button:active {
+  .chatbot button:active {
     background-color: #0d47a1;
     transform: scale(0.98);
   }
   
-  button:focus {
+  .chatbot button:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
   }

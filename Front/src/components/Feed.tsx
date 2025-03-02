@@ -10,7 +10,7 @@ interface Article {
 const Feed: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const apiKey = process.env.REACT_APP_NEWS_API_KEY;
-
+  
   useEffect(() => {
     const fetchNews = async () => {
       try {

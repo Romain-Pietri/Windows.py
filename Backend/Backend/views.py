@@ -99,8 +99,14 @@ def login_user(request):
         username = body.get('username')
         password = body.get('password')
         user_manager = UserManager()
-        if user_manager.check_user(username, password):
-            return JsonResponse({'message': 'Login successful'})
+        user = user_manager.check_user(username, password)
+        
+        if user:
+            response = {
+                'message': 'Login successful',
+                'userid': user  
+            }
+            return JsonResponse(response)
         else:
             return JsonResponse({'error': 'Invalid username or password'}, status=401)
     return JsonResponse({'error': 'Invalid request method'}, status=405)

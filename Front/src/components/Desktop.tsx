@@ -38,12 +38,11 @@ const Desktop: React.FC = () => {
     const [showPostit, setShowPostit] = useState(false);
     const [showYoutube, setShowYoutube] = useState(false);
 
-    const handleOpenTerminal = () => setShowTerminal(true);
-    const handleCloseTerminal = () => setShowTerminal(false);
+
     const handleOpenYoutube = () => setShowYoutube(true);
     const handleCloseYoutube = () => setShowYoutube(false);
 
-    const handleOpenDoom = () => setShowDoom(true);
+   
     const handleCloseDoom = () => setShowDoom(false);
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
@@ -60,11 +59,7 @@ const Desktop: React.FC = () => {
         setShowDoom(true);
     };
 
-    // const handleOpenAddUser = () => setShowAddUser(true);
-    // const handleCloseAddUser = () => setShowAddUser(false);
 
-    // const handleOpenUserList = () => setShowUserList(true);
-    // const handleCloseUserList = () => setShowUserList(false);
 
     const handleOpenFileSystem = () => {
         setShowFileSystem(true);
@@ -88,9 +83,7 @@ const Desktop: React.FC = () => {
     const handleClosePostit = () => setShowPostit(false);
     return (
         <div className="desktop">
-            <div className="icon" onClick={handleOpenTerminal}>Terminal</div>
-            <div className="icon" onClick={handleOpenDoom}>Doom</div>
-            <div className="icon" onClick={handleOpenWeather}>Weather</div>
+            
             {/* <div className="icon" onClick={handleOpenAddUser}>Add User</div>
             <div className="icon" onClick={handleOpenUserList}>User List</div> */}
             

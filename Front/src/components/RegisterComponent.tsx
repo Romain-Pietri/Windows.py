@@ -43,7 +43,7 @@ const RegisterComponent: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleRegister}>S'inscrire</button>
+            <button class-name="btn-login" onClick={handleRegister}>S'inscrire</button>
             {message && <p>{message}</p>}
         </div>
     );

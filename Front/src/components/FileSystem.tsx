@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FolderIcon from '../img/Folder_icon.png';
 import FileIcon from '../img/File_icon.png';
 import NotepadModal from './NotepadModal';
-
+import { getCookie } from '../utils/cookies';
 interface FileSystemProps {
     onClose: () => void;
 }
@@ -23,7 +23,8 @@ const FileSystem: React.FC<FileSystemProps> = ({ onClose }) => {
     const [showModal, setShowModal] = useState(false);
     const [modalType, setModalType] = useState<'file' | 'directory' | null>(null);
     const [selectedFile, setSelectedFile] = useState<string | null>(null);
-    const userid = 0;
+    const userid = getCookie('session_id') || 0;
+
 
     useEffect(() => {
         fetchFiles(currentDirectory);

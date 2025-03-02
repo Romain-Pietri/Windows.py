@@ -45,7 +45,7 @@ const Chatbot: React.FC = () => {
         onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
         placeholder="Posez-moi une question"  // Texte par défaut avant que l'utilisateur commence à écrire
       />
-      <button onClick={handleSendMessage}>Send</button>
+      <button  onClick={handleSendMessage}>Send</button>
     </div>
   );
 };

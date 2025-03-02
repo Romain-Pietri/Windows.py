@@ -41,4 +41,5 @@ class UserManager:
         ''', (username, hashed_password))
         user = cursor.fetchone()
         conn.close()
-        return user is not None
+        
+        return user[0] if user else None

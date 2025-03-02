@@ -22,6 +22,7 @@ const LoginComponent: React.FC = () => {
             if (data.message) {
                 setMessage(data.message);
                 login();
+                document.cookie = `session_id=${data.userid}; path=/;`;
                 console.log(data.message);
                 navigate('/desktop');
             } else {
@@ -47,8 +48,9 @@ const LoginComponent: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleLogin}>Se connecter</button>
+            <button className="btn-login" onClick={handleLogin}>Se connecter</button>
             {message && <p>{message}</p>}
+            <button className="btn-login" onClick={() => navigate('/register')}>S'inscrire</button>
         </div>
     );
 };

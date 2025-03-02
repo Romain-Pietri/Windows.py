@@ -15,8 +15,6 @@ class WhatApps:
     def insert(self, user1, user2, message, whosend):#Fonction qui permet d'insérer un message dans la base de données
         #Le user1 est toujours celui qui a un numero plus petit
         user2=user2[0]
-        if user1 > user2:
-            user1, user2 = user2, user1
         self.user1 = user1
         self.user2 = user2
         self.message = message
@@ -35,14 +33,18 @@ class WhatApps:
 
         #Le user1 est toujours celui qui a un numero plus petit
         
-        if user1 > user2:
-            user1, user2 = user2, user1
         self.user1 = user1
         self.user2 = user2
 
         #Recuperation des messages
         self.cursor.execute('''SELECT * FROM WhatAppDB WHERE user1 = ? AND user2 = ?''', (self.user1, self.user2))
         messages = self.cursor.fetchall()
+        self.cursor.execute('''SELECT * FROM WhatAppDB WHERE user1 = ? AND user2 = ?''', (self.user2, self.user1))
+        messages2 = self.cursor.fetchall()
+        for message in messages2:
+            if message not in messages:
+                messages.append(message)
+                
         print(messages)
         return messages
     

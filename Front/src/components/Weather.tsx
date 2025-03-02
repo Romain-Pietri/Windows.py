@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { saveAs } from "file-saver";
 import IpAddressComponent2 from "./IP2";
 import LocationComponent from "./Location";
@@ -16,10 +15,14 @@ const Weather: React.FC<TerminalProps> = ({ onClose }) => {
     useEffect(() => {
         const fetchWeather = async () => {
             try {
-                const response = await axios.get(
+                const response = await fetch(
                     "https://my.meteoblue.com/packages/current_sunmoon?apikey=qmdoYCl7DMcXxQIg&lat=48.8584&lon=2.2945&format=json"
                 );
-                setWeather(response.data);
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la récupération des données météo.");
+                }
+                const data = await response.json();
+                setWeather(data);
             } catch (err) {
                 setError("Erreur lors de la récupération des données météo.");
             }

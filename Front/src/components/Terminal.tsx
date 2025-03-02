@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { getCookie } from '../utils/cookies';
 
 interface TerminalProps {
     onClose: () => void;
@@ -9,7 +10,7 @@ const Terminal: React.FC<TerminalProps> = ({ onClose }) => {
     const [output, setOutput] = useState<string[]>(['Bienvenue dans le terminal. Tapez une commande et appuyez sur Entrée.']);
     const [directory, setDirectory] = useState('/');
     const inputRef = useRef<HTMLInputElement>(null);
-    const userid = "0";
+    const userid = getCookie('session_id') || 0;
 
     useEffect(() => {
         if (inputRef.current) {

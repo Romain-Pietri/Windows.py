@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { getCookie } from '../utils/cookies';
 
 interface Message {
   message: string;
-  whosend: string;
+  whosend: number;
 }
 
 const Whatapp = () => {
@@ -11,7 +12,7 @@ const Whatapp = () => {
   const [currentChat, setCurrentChat] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [newChatUserId, setNewChatUserId] = useState('');
-  const userId = '0'; // Remplacez par l'ID de l'utilisateur actuel
+  const userId = getCookie('session_id') || 0;
 
   useEffect(() => {
     fetchConversations();
