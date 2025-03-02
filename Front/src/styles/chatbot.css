@@ -1,0 +1,114 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+  }
+  
+  .chatbot {
+    width: 350px;
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  }
+  
+  .messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  .message:nth-child(odd) {
+    background-color: #e3f2fd;
+    align-self: flex-end;
+    color: #1e88e5;
+  }
+  
+  .message:nth-child(even) {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+    color: #333;
+  }
+  
+  /* Zone de saisie avec texte par défaut */
+  input {
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    width: calc(100% - 80px); /* Réduit pour laisser de la place au bouton */
+    border-top: 1px solid #e0e0e0;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    background-color: #fafafa;
+    color: #999; /* Texte gris pour le texte par défaut */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Texte par défaut dans la zone de saisie */
+  input::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  /* Quand l'utilisateur commence à taper, la couleur du texte revient normale */
+  input:focus {
+    border-color: #1e88e5;
+    background-color: #e8f5fe;
+    box-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
+    color: #333; /* Texte noir quand l'utilisateur tape */
+  }
+  
+  /* Bouton "Send" positionné à droite et plus arrondi */
+  button {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%; /* Bouton arrondi */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 60px;
+    height: 60px;
+    margin-left: 10px; /* Espacement entre le bouton et la zone de texte */
+    align-self: flex-end; /* Positionner le bouton à droite */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  button:hover {
+    background-color: #1565c0;
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    background-color: #0d47a1;
+    transform: scale(0.98);
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
+  }
+  
