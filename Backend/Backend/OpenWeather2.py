@@ -4,9 +4,10 @@ import json  # Import du module json
 from .Location import Location
 
 class OpenWeather2:
-    def __init__(self, latitude=50.7136, longitude=3):
+    def __init__(self, latitude=50, longitude=0, city="Paris"):
         self.latitude = latitude
         self.longitude = longitude
+        self.city = city
         self.session = self._setup_requests_cache()
 
     def _setup_requests_cache(self):
@@ -22,8 +23,11 @@ class OpenWeather2:
             print(location_data)
             latitude = location_data["latitude"]
             longitude = location_data["longitude"]
+            city = location_data["city"]
             self.latitude = latitude
             self.longitude = longitude
+            self.city = city
+
             print("laaatitude:", self.latitude)
             print("longitude:", self.longitude)
 
@@ -55,6 +59,7 @@ class OpenWeather2:
                 "generation_time": weather_data.get("generationtime_ms", None),
                 "latitude": weather_data["latitude"],
                 "longitude": weather_data["longitude"],
+                "city": self.city,
                 "elevation": weather_data["elevation"],
                 "timezone": weather_data["timezone"],
                 "timezone_abbreviation": weather_data["timezone_abbreviation"],

@@ -8,6 +8,9 @@ from .Location import Location
 from .Weather import Weather
 from .OpenWeather import OpenWeather
 from .OpenWeather2 import OpenWeather2
+from .UserManager import UserManager
+import sqlite3
+
 @csrf_exempt
 def get_ip_address(request):
     ip_adress = IpAdress()
@@ -25,12 +28,6 @@ def get_weather(request):
     weather = Weather()
     response = weather.get_weather()
     return JsonResponse({'result': response})
-# @csrf_exempt
-# def get_open_weather(request):
-#     open_weather = OpenWeather()
-#     # response = open_weather.get_current_time()
-#     response = open_weather.get_current_weather()
-#     return JsonResponse({'result': response})
 
 
 @csrf_exempt
@@ -62,6 +59,136 @@ def get_open_weather2(request):
     
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        username = body.get('username')
+        password = body.get('password')
+        user_manager = UserManager()
+        try:
+            user_manager.add_user(username, password)
+            return JsonResponse({'message': 'User registered successfully'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@csrf_exempt
+def login_user(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        username = body.get('username')
+        password = body.get('password')
+        user_manager = UserManager()
+        if user_manager.check_user(username, password):
+            return JsonResponse({'message': 'Login successful'})
+        else:
+            return JsonResponse({'error': 'Invalid username or password'}, status=401)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+def create_users_table():
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
+    )
+    ''')
+    conn.commit()
+    conn.close()
+
+@csrf_exempt
+def add_user(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        username = body.get('username')
+        password = body.get('password')
+
+        create_users_table()  # Assurez-vous que la table users est créée
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+            conn.commit()
+            response = {'message': f"User {username} added successfully."}
+        except sqlite3.IntegrityError:
+            response = {'error': f"User {username} already exists."}
+        finally:
+            conn.close()
+
+        return JsonResponse(response)
+
+    return JsonResponse({'error': 'Invalid request method'})
+
+@csrf_exempt
+def verify_user(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        username = body.get('username')
+        password = body.get('password')
+
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+
+        cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+        user = cursor.fetchone()
+
+        conn.close()
+
+        if user:
+            response = {'message': f"User {username} authenticated successfully."}
+        else:
+            response = {'error': 'Invalid username or password.'}
+
+        return JsonResponse(response)
+
+    return JsonResponse({'error': 'Invalid request method'})
+
+@csrf_exempt
+def get_all_users(request):
+    if request.method == 'GET':
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+
+        cursor.execute('SELECT username FROM users')
+        users = cursor.fetchall()
+
+        conn.close()
+
+        user_list = [user[0] for user in users]
+        return JsonResponse({'users': user_list})
+
+    return JsonResponse({'error': 'Invalid request method'})
+
+# @csrf_exempt
+# def login_user(request):
+#     if request.method == 'POST':
+#         body = json.loads(request.body)
+#         username = body.get('username')
+#         password = body.get('password')
+
+#         conn = sqlite3.connect('users.db')
+#         cursor = conn.cursor()
+
+#         cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+#         user = cursor.fetchone()
+
+#         conn.close()
+
+#         if user:
+#             response = {'message': 'Login successful', 'username': username}
+#         else:
+#             response = {'error': 'Invalid username or password'}
+
+#         return JsonResponse(response)
+
+#     return JsonResponse({'error': 'Invalid request method'})
 
 @csrf_exempt
 def execute_command(request):#Fonction qui permet d'exécuter une commande dans le shell
