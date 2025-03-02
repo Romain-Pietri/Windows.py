@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Terminal from './Terminal';
 import DoomComponent from './DoomComponent';
+import Weather from './Weather';
 import Window from './Window';
+// import AddUserComponent from './AddUserComponent';
+// import UsersListComponent from './UsersListComponent';
 import Feed from "./Feed";
 import FileSystem from './FileSystem';
 import Chatbot from './Chatbot';
@@ -24,6 +27,9 @@ import ImgYoutube from '../img/youtube.png';
 const Desktop: React.FC = () => {
     const [showTerminal, setShowTerminal] = useState(false);
     const [showDoom, setShowDoom] = useState(false);
+    const [showWeather, setShowWeather] = useState(false);
+    // const [showAddUser, setShowAddUser] = useState(false);
+    // const [showUserList, setShowUserList] = useState(false);
     const [showFeed, setShowFeed] = useState(false);
     const [showFileSystem, setShowFileSystem] = useState(false);
     const [showWhatapp, setShowWhatapp] = useState(false);
@@ -32,15 +38,21 @@ const Desktop: React.FC = () => {
     const [showPostit, setShowPostit] = useState(false);
     const [showYoutube, setShowYoutube] = useState(false);
 
+    const handleOpenTerminal = () => setShowTerminal(true);
+    const handleCloseTerminal = () => setShowTerminal(false);
     const handleOpenYoutube = () => setShowYoutube(true);
     const handleCloseYoutube = () => setShowYoutube(false);
 
+    const handleOpenDoom = () => setShowDoom(true);
+    const handleCloseDoom = () => setShowDoom(false);
     const handleOpenTerminal = () => setShowTerminal(true);
     const handleCloseTerminal = () => setShowTerminal(false);
     
     const handleOpenChatbot = () => setShowChatbot(true);
     const handleCloseChatbot= () => setShowChatbot(false);
 
+    const handleOpenWeather = () => setShowWeather(true);
+    const handleCloseWeather = () => setShowWeather(false);
     const handleOpenFeed = () => setShowFeed(true);
     const handleCloseFeed = () => setShowFeed(false);
 
@@ -48,9 +60,11 @@ const Desktop: React.FC = () => {
         setShowDoom(true);
     };
 
-    const handleCloseDoom = () => {
-        setShowDoom(false);
-    };
+    // const handleOpenAddUser = () => setShowAddUser(true);
+    // const handleCloseAddUser = () => setShowAddUser(false);
+
+    // const handleOpenUserList = () => setShowUserList(true);
+    // const handleCloseUserList = () => setShowUserList(false);
 
     const handleOpenFileSystem = () => {
         setShowFileSystem(true);
@@ -74,6 +88,11 @@ const Desktop: React.FC = () => {
     const handleClosePostit = () => setShowPostit(false);
     return (
         <div className="desktop">
+            <div className="icon" onClick={handleOpenTerminal}>Terminal</div>
+            <div className="icon" onClick={handleOpenDoom}>Doom</div>
+            <div className="icon" onClick={handleOpenWeather}>Weather</div>
+            {/* <div className="icon" onClick={handleOpenAddUser}>Add User</div>
+            <div className="icon" onClick={handleOpenUserList}>User List</div> */}
             
             <div className="icon-container">
             <div className="icon" onClick={handleOpenFileSystem}>
@@ -146,6 +165,21 @@ const Desktop: React.FC = () => {
                     <DoomComponent />
                 </Window>
             )}
+            {showWeather && (
+                <Window title="Weather" onClose={handleCloseWeather} width={800} height={600}>
+                    <Weather onClose={handleCloseWeather}/>
+                </Window>
+            )}
+            {/* {showAddUser && (
+                <Window title="Add User" onClose={handleCloseAddUser} width={400} height={300}>
+                    <AddUserComponent />
+                </Window>
+            )}
+            {showUserList && (
+                <Window title="User List" onClose={handleCloseUserList} width={400} height={300}>
+                    <UsersListComponent />
+                </Window>
+            )} */}
             {showFeed && (
                 <Window title="Flux d'actualités" onClose={handleCloseFeed} width={800} height={600}>
                     <Feed />

@@ -14,3 +14,7 @@ Backend/reports/*
 Backend/Backend/DB.db
 Backend/WhatAppDB.db
 Backend/Backend/.env
+
+Backend/DB.db
+
+node_modules/

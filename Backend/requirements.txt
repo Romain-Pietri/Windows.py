@@ -10,3 +10,4 @@ pywin32-ctypes==0.2.3
 dotenv
 openai
 python-dotenv
+requests==2.32.3

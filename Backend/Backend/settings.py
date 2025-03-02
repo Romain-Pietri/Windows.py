@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Add your apps here
+    'Backend',
     'corsheaders',
 ]
 
@@ -112,5 +113,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Ajoutez l'URL de votre frontend
 ]
 
+
+
+
 # Si vous souhaitez autoriser toutes les origines (à utiliser avec précaution)
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
+
