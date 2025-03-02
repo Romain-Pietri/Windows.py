@@ -5,6 +5,7 @@ import {
     Routes,
     Navigate,
     Outlet,
+    useLocation,
 } from 'react-router-dom';
 import Desktop from './components/Desktop';
 import LoginComponent from './components/LoginComponent';
@@ -13,12 +14,20 @@ import { WindowProvider } from './context/WindowContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 interface PrivateRouteProps {
-    children: React.ReactNode;
+    element: React.ComponentType<any>;
+    path: string;
+    // Ajoutez d'autres props de RouteProps si nécessaire
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Element, path, ...rest }) => {
     const { isAuthenticated } = useAuth();
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+    const location = useLocation();
+
+    return isAuthenticated ? (
+        <Element {...rest} />
+    ) : (
+        <Navigate to="/login" state={{ from: location }} replace />
+    );
 };
 
 const App: React.FC = () => {
@@ -29,7 +38,10 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/register" element={<RegisterComponent />} />
                         <Route path="/login" element={<LoginComponent />} />
-                        <Route path="/desktop" element={<PrivateRoute><Desktop /></PrivateRoute>} />
+                        <Route
+                            path="/desktop"
+                            element={<PrivateRoute element={Desktop} path="/desktop" />}
+                        />
                         <Route path="*" element={<Navigate to="/login" />} />
                     </Routes>
                 </Router>
