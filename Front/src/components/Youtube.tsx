@@ -33,6 +33,11 @@ const Youtube: React.FC = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log('YouTube search results:', data);
+      if(data.video_ids.length === 0) {
+        alert('No video found');
+        return;
+      }
       setVideoIds(data.video_ids);
     } catch (error) {
       console.error('Error searching YouTube:', error);
