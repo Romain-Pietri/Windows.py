@@ -71,9 +71,10 @@ def get_open_weather(request):
 def get_open_weather2(request):
     """ Récupère et renvoie les données météorologiques sous forme de JSON. """
     try:
+        print("hello")
         open_weather = OpenWeather2()
         weather_data = open_weather.get_current_weather()
-
+        print("weather_data:", weather_data)
         if not weather_data:
             return JsonResponse({'error': 'Impossible de récupérer les données météo'}, status=500)
 
@@ -294,8 +295,12 @@ def get_last_command(request):#Fonction qui permet de récupérer la dernière c
 
 @csrf_exempt
 def get_news(request):
+    print("hllo")
     if request.method == 'GET':
         try:
+            
+            api_key = os.getenv('REACT_APP_NEWS_API_KEY')
+            print(api_key)
             # Utilisation de la clé API depuis le fichier .env
             url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}'
             response = requests.get(url)

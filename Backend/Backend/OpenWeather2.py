@@ -10,7 +10,10 @@ class OpenWeather2:
         self.city = city
         self.session = self._setup_requests_cache()
 
-    
+    def _setup_requests_cache(self):
+        """ Configure un cache pour éviter de surcharger l'API """
+        return requests_cache.CachedSession('.cache', expire_after=3600)
+
     def get_current_weather(self):
         """ Récupère la météo actuelle en fonction de l'emplacement de l'utilisateur """
         try:

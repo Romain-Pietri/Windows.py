@@ -9,13 +9,16 @@ interface Article {
 
 const Feed: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
-  const apiKey = process.env.REACT_APP_NEWS_API_KEY;
   
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        console.log("hello")
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+          //fetch a l'api du serveur api/news/
+          `http://localhost:8000/api/news/`,
+          
+
         );
         const data = await response.json();
         setArticles(data.articles || []);
@@ -23,11 +26,11 @@ const Feed: React.FC = () => {
         console.error("Erreur lors de la récupération des actualités", error);
       }
     };
-
-    if (apiKey) {
+    
+    
       fetchNews();
-    }
-  }, [apiKey]); // Ajouter apiKey ici
+    
+  }); // Ajouter apiKey ici
 
   return (
     <div className="feed">
