@@ -196,29 +196,6 @@ def get_all_users(request):
 
     return JsonResponse({'error': 'Invalid request method'})
 
-# @csrf_exempt
-# def login_user(request):
-#     if request.method == 'POST':
-#         body = json.loads(request.body)
-#         username = body.get('username')
-#         password = body.get('password')
-
-#         conn = sqlite3.connect('users.db')
-#         cursor = conn.cursor()
-
-#         cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
-#         user = cursor.fetchone()
-
-#         conn.close()
-
-#         if user:
-#             response = {'message': 'Login successful', 'username': username}
-#         else:
-#             response = {'error': 'Invalid username or password'}
-
-#         return JsonResponse(response)
-
-#     return JsonResponse({'error': 'Invalid request method'})
 
 @csrf_exempt
 def chatbot(request):
