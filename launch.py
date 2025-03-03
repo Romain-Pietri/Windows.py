@@ -22,13 +22,14 @@ if sys.version_info < (3, 12):
 # Vérifier si l'environnement virtuel existe
 if not os.path.exists(VENV_PATH):
     print("\033[1m[⚠️] Aucun environnement virtuel détecté, création de 'venv'...\033[0m")
-    subprocess.run(f"python -m venv {VENV_PATH}", shell=True)
+    subprocess.run(f"python3.12 -m venv {VENV_PATH}", shell=True)
 
 # Activer l'environnement virtuel
 if sys.platform == "win32":
     activate_script = os.path.join(VENV_PATH, "Scripts", "activate")
 else:
     activate_script = os.path.join(VENV_PATH, "bin", "activate")
+    os.chmod(activate_script, 0o755)
 
 print("\033[1m[🔧] Activation de l'environnement virtuel...\033[0m")
 env = os.environ.copy()
@@ -42,13 +43,19 @@ print("\n\033[1m[🚀] Installation des dépendances... \033[0m")
 print("\033[1m[🔧] Installation des dépendances backend...\033[0m")
 subprocess.run(f"{activate_script} && pip install -r requirements.txt", shell=True, cwd=BACKEND_DIR, env=env)
 
+#faire une verification des fichiers installés dans le dossier venv
+subprocess.run(f"{activate_script} && pip freeze", shell=True, cwd=BACKEND_DIR, env=env)
+
+
+
 # Frontend
 print("\033[1m[🔧] Installation des dépendances frontend... \033[0m")
 subprocess.run("npm install", shell=True, cwd=FRONTEND_DIR)
 
+
 # Démarrage des serveurs
 print("\n\033[1m[🔥] Démarrage du backend... \n \033[0m")
-backend_process = run_command(f"{activate_script} && python manage.py runserver", cwd=BACKEND_DIR, env=env)
+backend_process = run_command(f"{activate_script} && python3.12 manage.py runserver", cwd=BACKEND_DIR, env=env)
 
 # Attendre que le backend démarre
 time.sleep(3)
