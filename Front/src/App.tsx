@@ -12,6 +12,7 @@ import LoginComponent from './components/LoginComponent';
 import RegisterComponent from './components/RegisterComponent';
 import { WindowProvider } from './context/WindowContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import WidgetDate from "./components/WidgetDate";
 
 interface PrivateRouteProps {
     element: React.ComponentType<any>;
@@ -30,6 +31,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Element, path, ...
     );
 };
 
+
 const App: React.FC = () => {
     return (
         <AuthProvider>
@@ -47,6 +49,12 @@ const App: React.FC = () => {
                 </Router>
             </WindowProvider>
         </AuthProvider>
+        <WindowProvider>
+            <div className="App">
+                <WidgetDate />
+                <Desktop />
+            </div>
+        </WindowProvider>
     );
 };
 

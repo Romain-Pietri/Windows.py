@@ -23,4 +23,7 @@ urlpatterns = [
     path('api/search_youtube/', search_youtube, name='search_youtube'),
     path('api/chatbot/', chatbot, name='chatbot'),
 
+    path('api/news/', get_news),
+    path('api/calendar/', calendar_view),
+
 ]

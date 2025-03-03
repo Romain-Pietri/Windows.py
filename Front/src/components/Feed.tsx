@@ -24,8 +24,10 @@ const Feed: React.FC = () => {
       }
     };
 
-    fetchNews();
-  }, []);
+    if (apiKey) {
+      fetchNews();
+    }
+  }, [apiKey]); // Ajouter apiKey ici
 
   return (
     <div className="feed">

@@ -117,5 +117,10 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # Si vous souhaitez autoriser toutes les origines (à utiliser avec précaution)
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# Autoriser l'affichage en iframe
+X_FRAME_OPTIONS = 'ALLOWALL'
+
 CORS_ALLOW_ALL_ORIGINS = True
 
