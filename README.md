@@ -1,43 +1,8 @@
-# My OS Simulator
+# Windows.py
 
 ## Description
-My OS Simulator is a web application that simulates an operating system interface, similar to Windows. The application is built using Django for the backend, providing a robust framework for handling requests and managing data.
+WINDOWS.PY is a web application that simulates an operating system interface, similar to Windows nor Linux. The application is built using Django for the backend, providing a robust framework for handling requests and managing data.
 
-## Project Structure
-```
-my-os-simulator
-├── my_os_simulator
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── launch.py
-├── requirements.txt
-├── Front
-│   ├── public
-│   │   ├── index.html         # The entry point of the web application.
-│   │   └── styles
-│   │       └── main.css       # CSS styles for the application.
-│   ├── src
-│   │   ├── components
-│   │   │   └── Desktop.tsx    # React component representing the desktop interface.
-│   │   ├── App.tsx            # Main application component that renders the Desktop.
-│   │   └── index.tsx          # Entry point for the React application.
-│   ├── package.json            # npm configuration file listing dependencies and scripts.
-│   ├── tsconfig.json           # TypeScript configuration file specifying compiler options.
-│   └── README.md               # Documentation for the frontend project.
-├── Backend
-│   ├── my_os_simulator
-│   │   ├── __init__.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   ├── wsgi.py
-│   │   └── asgi.py
-│   ├── manage.py
-│   ├── requirements.txt
-│   └── README.md               # Documentation for the backend project.
-```
 
 ## Installation
 
@@ -62,7 +27,8 @@ To stop the development server, press `Ctrl+C` in the terminal where you excuted
 
 
 
-## Manually Setup
+## Manual Installation
+
 ### Frontend Setup
 
 To set up the frontend, follow these steps:
@@ -91,24 +57,32 @@ To set up the frontend, follow these steps:
     ```
     cd Backend
     ```
+2. Create a virtual environment:
+    ```
+    python -m venv venv
 
-2. Install the required packages:
+    ```
+3. Activate the virtual environment:
+    ```
+    . venv/Scripts/activate (Windows)
+    source venv/bin/activate (Linux)
+    ```
+
+4. Install the required packages:
     ```
     pip install -r requirements.txt
     ```
 
-3. Start the development server:
+5. Start the development server:
     ```
     python manage.py runserver
     ```
 
-4. Open your browser and go to `http://localhost:8000` to view the backend application.
 
 
 ## Contributing
 
-Feel free to submit issues or pull requests for any improvements or features you'd like to see!
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[ALixeM](https://github.com/AlixeM)
+[Romain-Pietri](https://github.com/Romain-Pietri)
+[SErvaLJaycE](https://github.com/ServaLJaycE)
+[BaptisteLibert](https://github.com/BaptisteLibert)

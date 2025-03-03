@@ -91,6 +91,7 @@ const Whatapp = () => {
     <div className="whatapp">
       <div className="whatapp__sidebar">
         <h2>Conversations</h2>
+        <h2>Votre User id : {userId}</h2>
         <ul>
           {conversations.map((conversation, index) => (
             <li key={index} onClick={() => fetchMessages(conversation)}>

@@ -21,10 +21,6 @@ class WhatApps:
         self.time = time.time()
         self.whosend = whosend
 
-        #verifie si les id de user1, user2 et whosend existent dans la base de donnée 
-        
-        #TODO
-
         #Insertion des données dans la base de donnée
         self.cursor.execute('''INSERT INTO WhatAppDB (user1, user2, message, time, whosend) VALUES (?, ?, ?, ?, ?)''', (self.user1, self.user2, self.message, self.time, self.whosend))
         self.conn.commit()
