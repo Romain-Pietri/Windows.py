@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/login.css';
 
 const RegisterComponent: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -24,13 +25,13 @@ const RegisterComponent: React.FC = () => {
                 setMessage(data.error);
             }
         } catch (error) {
-            setMessage('Erreur lors de l\'inscription.');
+            setMessage("Erreur lors de l'inscription.");
         }
     };
 
     return (
-        <div>
-            <h2>Inscription</h2>
+        <div className="login-container">
+            <h2>Créer un compte</h2>
             <input
                 type="text"
                 placeholder="Nom d'utilisateur"
@@ -43,8 +44,9 @@ const RegisterComponent: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button class-name="btn-login" onClick={handleRegister}>S'inscrire</button>
+            <button className="btn-login" onClick={handleRegister}>S'inscrire</button>
             {message && <p>{message}</p>}
+            <p className="signup-link">Déjà un compte ? <a onClick={() => navigate('/login')}>Se connecter</a></p>
         </div>
     );
 };

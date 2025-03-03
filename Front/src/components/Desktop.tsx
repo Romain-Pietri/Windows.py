@@ -111,11 +111,7 @@ const Desktop: React.FC = () => {
                 <img src={ImgFeed} alt="Feed Icon"/>
                 <p className="icon-name">Actualités</p>
             </div>
-            <div className="icon" onClick={handleOpenWeather}>
-                <img src={ImgWeather} alt="Weather Icon"/>
-                <p className="icon-name">Weather</p>
-
-            </div>
+            
 
             </div>
             <div className="icond-container">
@@ -134,6 +130,11 @@ const Desktop: React.FC = () => {
             <div className="icond" onClick={handleOpenYoutube}>
                 <img src={ImgYoutube} alt="Youtube Icon"/>
                 <p className="icon-name">Youtube</p>
+            </div>
+            <div className="icond" onClick={handleOpenWeather}>
+                <img src={ImgWeather} alt="Weather Icon"/>
+                <p className="icon-name">Weather</p>
+
             </div>
             </div>
 
