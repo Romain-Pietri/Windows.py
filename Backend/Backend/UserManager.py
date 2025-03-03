@@ -23,6 +23,8 @@ class UserManager:
         return hashlib.sha256(password.encode()).hexdigest()
 
     def add_user(self, username, password):
+        if(len(username) == 0 or len(password) == 0):
+            return False
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
         hashed_password = self.hash_password(password)
@@ -31,6 +33,7 @@ class UserManager:
         ''', (username, hashed_password))
         conn.commit()
         conn.close()
+        return True
 
     def check_user(self, username, password):
         conn = sqlite3.connect(self.db_name)

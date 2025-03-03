@@ -92,7 +92,8 @@ def register_user(request):
         password = body.get('password')
         user_manager = UserManager()
         try:
-            user_manager.add_user(username, password)
+            if not(user_manager.add_user(username, password)):
+                return JsonResponse({'error': 'Username or password is empty'}, status=400)
             return JsonResponse({'message': 'User registered successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)

@@ -18,3 +18,5 @@ Backend/Backend/.env
 Backend/DB.db
 
 node_modules/
+
+Backend/.cache.sqlite
