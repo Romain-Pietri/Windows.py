@@ -13,6 +13,7 @@ import Maigret from './Maigret';
 import Postit from './Postit';
 import Youtube from './Youtube';
 
+
 import ImgTerminal from '../img/terminal.png';
 import ImgDoom from '../img/doom.png';
 import ImgFichier from '../img/fichier.png';
@@ -22,6 +23,7 @@ import ImgChatbot from '../img/chatbot.png';
 import ImgMaigret from '../img/maigret.png';
 import ImgPostit from '../img/postit.png';
 import ImgYoutube from '../img/youtube.png';
+import ImgWeather from '../img/weather.png';
 
 
 const Desktop: React.FC = () => {
@@ -37,6 +39,7 @@ const Desktop: React.FC = () => {
     const [showHarvester, setShowHarvester] = useState(false);
     const [showPostit, setShowPostit] = useState(false);
     const [showYoutube, setShowYoutube] = useState(false);
+
 
 
     const handleOpenYoutube = () => setShowYoutube(true);
@@ -108,8 +111,13 @@ const Desktop: React.FC = () => {
                 <img src={ImgFeed} alt="Feed Icon"/>
                 <p className="icon-name">Actualités</p>
             </div>
+            <div className="icon" onClick={handleOpenWeather}>
+                <img src={ImgWeather} alt="Weather Icon"/>
+                <p className="icon-name">Weather</p>
+
             </div>
 
+            </div>
             <div className="icond-container">
             <div className="icond" onClick={handleOpenChatbot}>
                 <img src={ImgChatbot} alt="Chatbot Icon"/>
@@ -129,6 +137,12 @@ const Desktop: React.FC = () => {
             </div>
             </div>
 
+
+            {showTerminal && (
+                <Window title="Weather" onClose={handleCloseWeather} width={800} height={600}>
+                    <Weather onClose={handleCloseWeather} />
+                </Window>
+            )}
 
             {showYoutube && (
                 <Window title="Youtube"  onClose={handleCloseYoutube} width={800} height={600}>
@@ -163,16 +177,7 @@ const Desktop: React.FC = () => {
                     <Weather onClose={handleCloseWeather}/>
                 </Window>
             )}
-            {/* {showAddUser && (
-                <Window title="Add User" onClose={handleCloseAddUser} width={400} height={300}>
-                    <AddUserComponent />
-                </Window>
-            )}
-            {showUserList && (
-                <Window title="User List" onClose={handleCloseUserList} width={400} height={300}>
-                    <UsersListComponent />
-                </Window>
-            )} */}
+            
             {showFeed && (
                 <Window title="Flux d'actualités" onClose={handleCloseFeed} width={800} height={600}>
                     <Feed />

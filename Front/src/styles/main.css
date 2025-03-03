@@ -567,7 +567,7 @@ body, html {
     padding: 10px;
 }
 
-textarea {
+.notepad-content textarea {
     width: 100%;
     height: calc(100% - 40px);
     resize: none;
@@ -751,6 +751,7 @@ textarea {
 }
 .postit-content{
     flex: 1;
+    resize: none;
     padding: 10px;
     overflow-y: auto;
     background-color: #fff740;

@@ -62,6 +62,7 @@ const NotepadComponent: React.FC<NotepadComponentProps> = ({ filePath, userId, p
                     <p>Loading...</p>
                 ) : (
                     <textarea
+                        
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         style={{ width: '100%', height: 'calc(100% - 40px)' }}

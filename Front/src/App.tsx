@@ -36,6 +36,7 @@ const App: React.FC = () => {
     return (
         <AuthProvider>
             <WindowProvider>
+
                 <Router>
                     <Routes>
                         <Route path="/register" element={<RegisterComponent />} />
@@ -47,14 +48,11 @@ const App: React.FC = () => {
                         <Route path="*" element={<Navigate to="/login" />} />
                     </Routes>
                 </Router>
+      
+                
             </WindowProvider>
         </AuthProvider>
-        <WindowProvider>
-            <div className="App">
-                <WidgetDate />
-                <Desktop />
-            </div>
-        </WindowProvider>
+
     );
 };
 

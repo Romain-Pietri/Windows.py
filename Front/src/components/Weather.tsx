@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
-import IpAddressComponent2 from "./IP2";
 import LocationComponent from "./Location";
 import RecupWeather from "./RecupWeather";
 
@@ -31,10 +30,7 @@ const Weather: React.FC<TerminalProps> = ({ onClose }) => {
         fetchWeather();
     }, []);
 
-    const enregistrerFichier = () => {
-        const blob = new Blob([JSON.stringify(weather)], { type: 'text/plain;charset=utf-8' });
-        saveAs(blob, 'fichier.txt');
-    };
+    
 
     return (
         <div className="weather-container">
@@ -44,13 +40,12 @@ const Weather: React.FC<TerminalProps> = ({ onClose }) => {
             {error && <p className="weather-error">{error}</p>}
             {weather ? (
                 <div className="weather-data">
-                    <button className="weather-button" onClick={enregistrerFichier}>Enregistrer le fichier</button>
+                    
                     <RecupWeather></RecupWeather>
                 </div>
             ) : (
                 <p>Chargement des données...</p>
             )}
-            <IpAddressComponent2></IpAddressComponent2>
             <LocationComponent></LocationComponent>
         </div>
     );
