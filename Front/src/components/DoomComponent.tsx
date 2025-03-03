@@ -33,7 +33,7 @@ const DoomComponent: React.FC = () => {
                 <iframe
                     ref={iframeRef}
                     src="https://danihre.github.io/jsdoom/"
-                    style={{ width: '100%', height: 'calc(100% - 50px)', border: 'none', position: 'absolute', top: 0, left: 0, background: 'black' }}
+                    style={{ width: '100%', height: 'calc(100% - 13px)', border: 'none', position: 'absolute', top: 0, left: 0, background: 'black' }}
                     scrolling="no"
                     title="DOOM"
                 ></iframe>
