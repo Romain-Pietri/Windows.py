@@ -31,8 +31,13 @@ const WidgetDate: React.FC = () => {
         <p>{formatTime(dateTime)}</p>
       </div>
       {showCalendar && (
-        <div className="calendar">
-          <iframe src="http://127.0.0.1:8000/api/calendar/" title="Calendrier" className="calendar-iframe"></iframe>
+        <div className="calendar-container">
+          <table className="calendar-table">
+            {/* Votre logique pour afficher le calendrier ici */}
+          </table>
+          <ul className="event-list">
+            {/* Votre logique pour afficher les événements ici */}
+          </ul>
         </div>
       )}
     </div>

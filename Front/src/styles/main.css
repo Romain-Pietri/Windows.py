@@ -408,37 +408,85 @@ body, html {
 .date-widget h2 {
   font-size: 1.5rem;
   margin: 0;
+  color: #ccc; /* Changer la couleur de la date en gris clair */
 }
 
 .date-widget p {
   font-size: 1rem;
   margin: 5px 0;
+  color: #ccc; /* Changer la couleur de l'heure en gris clair */
 }
 
 .date-widget:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.calendar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 20px;
-  z-index: 1000;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 80%;
 }
 
-.calendar-iframe {
+.calendar-table {
   width: 100%;
-  height: 100%;
-  border: none;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.calendar-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.calendar-table td {
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-table td:hover {
+  background-color: #f1f1f1;
+}
+
+.calendar-table .today {
+  background-color: #ffeb3b;
+}
+
+.calendar-table .event {
+  background-color: #ff5722;
+  color: white;
+}
+
+.event-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.event-list li {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.event-list li:hover {
+  background-color: #45a049;
+}
 
 .file-system {
     padding: 10px;

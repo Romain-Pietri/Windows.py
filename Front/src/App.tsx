@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Route,
     Routes,
     Navigate,
-    Outlet,
     useLocation,
 } from 'react-router-dom';
 import Desktop from './components/Desktop';
@@ -13,6 +12,14 @@ import RegisterComponent from './components/RegisterComponent';
 import { WindowProvider } from './context/WindowContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import WidgetDate from "./components/WidgetDate";
+
+// Fonction utilitaire pour vérifier la présence du cookie
+const getCookie = (name: string) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+    return null;
+};
 
 interface PrivateRouteProps {
     element: React.ComponentType<any>;
@@ -31,12 +38,18 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element: Element, path, ...
     );
 };
 
-
 const App: React.FC = () => {
+    const { isAuthenticated } = useAuth();
+    const userIdCookie = getCookie('userid');
+
+    useEffect(() => {
+        console.log('isAuthenticated:', isAuthenticated);
+        console.log('userIdCookie:', userIdCookie);
+    }, [isAuthenticated, userIdCookie]);
+
     return (
         <AuthProvider>
             <WindowProvider>
-
                 <Router>
                     <Routes>
                         <Route path="/register" element={<RegisterComponent />} />
@@ -48,11 +61,9 @@ const App: React.FC = () => {
                         <Route path="*" element={<Navigate to="/login" />} />
                     </Routes>
                 </Router>
-      
-                
+                <WidgetDate /> {/* Afficher le widget date seulement si l'utilisateur est authentifié et le cookie userid est présent */}
             </WindowProvider>
         </AuthProvider>
-
     );
 };
 
